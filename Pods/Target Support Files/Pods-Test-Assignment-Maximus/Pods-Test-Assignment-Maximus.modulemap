@@ -1,0 +1,6 @@
+framework module Pods_Test_Assignment_Maximus {
+  umbrella header "Pods-Test-Assignment-Maximus-umbrella.h"
+
+  export *
+  module * { export * }
+}
