@@ -165,10 +165,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2O2-LW-LuX">
-                                        <rect key="frame" x="0.0" y="422" width="414" height="521"/>
+                                        <rect key="frame" x="0.0" y="422" width="414" height="480"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Серый текст в левом нижнем углу экрана" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcS-42-vBt">
-                                                <rect key="frame" x="16" y="439" width="335.5" height="20"/>
+                                                <rect key="frame" x="16" y="398" width="335.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -193,7 +193,7 @@
                                             <constraint firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="62" id="Rz7-GS-fhd"/>
                                             <constraint firstItem="PnE-Le-lK9" firstAttribute="centerX" secondItem="2O2-LW-LuX" secondAttribute="centerX" id="gKc-nZ-1j8"/>
                                             <constraint firstItem="GcS-42-vBt" firstAttribute="leading" secondItem="2O2-LW-LuX" secondAttribute="leading" constant="16" id="hdC-QO-AJZ"/>
-                                            <constraint firstAttribute="height" constant="521" id="o9M-95-YiJ"/>
+                                            <constraint firstAttribute="height" constant="480" id="o9M-95-YiJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>

@@ -222,6 +222,8 @@ extension MainViewController: CollectionViewNew {
 
 
 extension MainViewController: CardsViewController {
+
+    
     
     
 }
