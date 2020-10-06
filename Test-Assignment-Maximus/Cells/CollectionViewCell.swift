@@ -36,6 +36,14 @@ class CollectionViewCell: UICollectionViewCell {
         layer.shadowOpacity = 0.1
         layer.shadowOffset = .init(width: 0, height: 0)
         layer.shadowRadius = 8
+        
+        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
+            UIBlurEffect.Style.light))
+        blur.frame = openButton.bounds
+        blur.isUserInteractionEnabled = false
+        blur.layer.cornerRadius = blur.frame.height / 2
+        blur.layer.masksToBounds = true
+        openButton.insertSubview(blur, at: 0)
     }
     
     
@@ -54,7 +62,6 @@ class CollectionViewCell: UICollectionViewCell {
         
         guard let imageStringURL = URL(string: imageString) else { return }
         
-//        self.imageView.image = nil
         getImageDataFrom(url: imageStringURL)
         
     }
@@ -69,13 +76,7 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 8
         openButton.layer.cornerRadius = openButton.frame.height / 2
         
-//        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-//            UIBlurEffect.Style.extraLight))
-//        blur.frame = openButton.bounds
-//        blur.isUserInteractionEnabled = false
-//        blur.layer.cornerRadius = blur.frame.height / 2
-//        blur.layer.masksToBounds = true
-//        openButton.insertSubview(blur, at: 0)
+
     }
     
     // MARK: - Get image data
