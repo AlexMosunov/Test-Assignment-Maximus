@@ -17,6 +17,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var watchButton: UIButton!
     
     var apiManager: APIManager?
     var index: IndexPath?
@@ -39,7 +40,7 @@ class DetailVC: UIViewController {
     
     
     func setUI() {
-        
+        watchButton.layer.cornerRadius = watchButton.frame.height / 2
         cancelButton.layer.cornerRadius = 50
         let blur = UIVisualEffectView(effect: UIBlurEffect(style:
             UIBlurEffect.Style.regular))
@@ -55,7 +56,10 @@ class DetailVC: UIViewController {
     
     func loadImage() {
         if let picture = picture {
-            self.imageView.image = picture.resized(withPercentage: 0.5)
+            DispatchQueue.main.async {
+                self.imageView.image = picture.resized(withPercentage: 0.5)
+            }
+            
         }
         
         

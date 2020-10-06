@@ -63,7 +63,7 @@
                                                                 <constraint firstAttribute="width" constant="80" id="9qc-7u-3bA"/>
                                                                 <constraint firstAttribute="height" constant="24" id="ByZ-En-pcG"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -128,13 +128,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BzJ-Gj-kdc">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="375"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="422"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BX6-be-HBO">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="375"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="422"/>
                                                 <color key="backgroundColor" red="0.38024074839999999" green="0.78039215689999997" blue="0.37158168429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="375" id="ABG-Pr-vlv"/>
+                                                    <constraint firstAttribute="height" constant="422" id="ABG-Pr-vlv"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-rF-atL">
@@ -165,18 +165,33 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2O2-LW-LuX">
-                                        <rect key="frame" x="0.0" y="375" width="414" height="521"/>
+                                        <rect key="frame" x="0.0" y="422" width="414" height="521"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Серый текст в левом нижнем углу экрана" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcS-42-vBt">
-                                                <rect key="frame" x="16" y="392" width="335.5" height="20"/>
+                                                <rect key="frame" x="16" y="439" width="335.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnE-Le-lK9">
+                                                <rect key="frame" x="140" y="40" width="134" height="44"/>
+                                                <color key="backgroundColor" red="0.14901960784313725" green="0.33725490196078434" blue="0.99607843137254903" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="134" id="1cm-am-udv"/>
+                                                    <constraint firstAttribute="height" constant="44" id="PlI-y5-5Ea"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title=" Смотреть" image="eye" catalog="system">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="109" id="Rz7-GS-fhd"/>
+                                            <constraint firstItem="PnE-Le-lK9" firstAttribute="top" secondItem="2O2-LW-LuX" secondAttribute="top" constant="40" id="1NG-nc-QPe"/>
+                                            <constraint firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="62" id="Rz7-GS-fhd"/>
+                                            <constraint firstItem="PnE-Le-lK9" firstAttribute="centerX" secondItem="2O2-LW-LuX" secondAttribute="centerX" id="gKc-nZ-1j8"/>
                                             <constraint firstItem="GcS-42-vBt" firstAttribute="leading" secondItem="2O2-LW-LuX" secondAttribute="leading" constant="16" id="hdC-QO-AJZ"/>
                                             <constraint firstAttribute="height" constant="521" id="o9M-95-YiJ"/>
                                         </constraints>
@@ -215,6 +230,7 @@
                         <outlet property="headerView" destination="BzJ-Gj-kdc" id="SJW-9e-jtL"/>
                         <outlet property="heightConstraint" destination="ABG-Pr-vlv" id="IK5-2g-AHG"/>
                         <outlet property="imageView" destination="BX6-be-HBO" id="7ck-Pt-fDe"/>
+                        <outlet property="watchButton" destination="PnE-Le-lK9" id="iEH-P3-j7o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3vc-XG-tP1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -223,6 +239,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye" catalog="system" width="128" height="81"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
     </resources>
 </document>

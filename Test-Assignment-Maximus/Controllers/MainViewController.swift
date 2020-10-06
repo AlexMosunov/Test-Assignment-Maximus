@@ -20,8 +20,9 @@ class MainViewController: UIViewController {
 
     var apiManager = APIManager()
     private var transition: CardTransition?
+    var fetchingMore = false
     
-    let sectionInsets = UIEdgeInsets(top: 12.0, left: 8.0, bottom: 12.0, right: 8.0)
+    let sectionInsets = UIEdgeInsets(top: 12.0, left: 16.0, bottom: 12.0, right:16.0)
     let itemsPerRow: CGFloat = 1
     
             
@@ -67,7 +68,7 @@ class MainViewController: UIViewController {
         guard let url = URL(string: imageURLString) else {return}
         
         if let data = try? Data(contentsOf: url) {
-            viewController.picture = UIImage(data: data)
+                viewController.picture = UIImage(data: data)
         }
         
         presentExpansion(viewController, cell: cell, animated: true)
@@ -81,8 +82,8 @@ class MainViewController: UIViewController {
 
 extension MainViewController: APIManangerDelegate {
     func didUpdateData(_ DataManager: APIManager, data: [String]) {
-        
-        apiManager.imageURLsArray = data
+//        DispatchQueue.main.async {
+            self.apiManager.imageURLsArray += data
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -128,6 +129,36 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.size.width, height: 200)
+    }
+    
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offseetY = scrollView.contentOffset.y
+        let contentHight = scrollView.contentSize.height
+//        print("offseetY - \(offseetY), contentHight - \(contentHight)")
+        
+        if offseetY > contentHight - scrollView.frame.height && offseetY > 200 {
+//            print("hello")
+            if !fetchingMore {
+//                print("hello")
+                beginBatchFetch()
+            }
+            
+        }
+        
+    }
+    
+    func beginBatchFetch() {
+        fetchingMore = true
+
+            self.apiManager.postRequest()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.fetchingMore = false
+        }
+//        self.fetchingMore = false
+        print("begin update")
     }
     
 }
