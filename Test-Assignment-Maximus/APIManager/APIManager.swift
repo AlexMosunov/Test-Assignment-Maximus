@@ -80,42 +80,5 @@ class APIManager {
         }
     }
     
-    
-//    private func getImageDataFrom(urlStrings: [String]) {
-////        var arrayOfImages: [UIImage] = []
-//
-//        for urlString in urlStrings {
-//            print("urlString - \(urlString)")
-//            guard let url = URL(string: urlString) else { return}
-//            URLSession.shared.dataTask(with: url) { (data, response, error) in
-//                if let error = error {
-//                    print("DataTask error: \(error.localizedDescription)")
-//                    return
-//                }
-//
-//                guard let data = data else {
-//                    print("Empty Data")
-//                    return
-//                }
-//
-////                DispatchQueue.main.async {
-//                    if let image = UIImage(data: data) {
-//                        self.imagesArray.append(image)
-//                    }
-////                }
-//
-//
-//
-//            }.resume()
-//
-//
-//
-//        }
-//
-//        print("imagesArray! - \(imagesArray)")
-//
-//    }
-    
-    
-    
+
 }
