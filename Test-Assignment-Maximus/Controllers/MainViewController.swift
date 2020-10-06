@@ -21,48 +21,59 @@ class MainViewController: UIViewController {
     var apiManager = APIManager()
     private var transition: CardTransition?
     
-    let sectionInsets = UIEdgeInsets(top: 12.0, left: 16.0, bottom: 12.0, right: 16.0)
+    let sectionInsets = UIEdgeInsets(top: 12.0, left: 8.0, bottom: 12.0, right: 8.0)
     let itemsPerRow: CGFloat = 1
+    
+            
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playVideo()
         apiManager.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        collectionView.register(HeaderCollectionReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: HeaderCollectionReusableView.identifier)
+        
         apiManager.postRequest()
         
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MainMenuToDetail" {
-            let destVC = segue.destination as! DetailVC
-            destVC.apiManager = apiManager
-            destVC.index = sender as? IndexPath
+
+    private func showType2(indexPath: IndexPath, bottomDismiss: Bool = false) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+        
+        // Get tapped cell location
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
+        cell.settings.cardContainerInsets = sectionInsets
+        cell.settings.isEnabledBottomClose = bottomDismiss
+        
+        transition = CardTransition(cell: cell, settings: cell.settings)
+        viewController.settings = cell.settings
+        viewController.transitioningDelegate = transition
+        
+        // If `modalPresentationStyle` is not `.fullScreen`, this should be set to true to make status bar depends on presented vc.
+        viewController.modalPresentationCapturesStatusBarAppearance = true
+        viewController.modalPresentationStyle = .custom
+        
+        viewController.apiManager = apiManager
+        viewController.index = indexPath
+        
+        
+        let imageURLString = apiManager.imageURLsArray[indexPath.row]
+        guard let url = URL(string: imageURLString) else {return}
+        
+        if let data = try? Data(contentsOf: url) {
+            viewController.picture = UIImage(data: data)
         }
+        
+        presentExpansion(viewController, cell: cell, animated: true)
     }
     
-    
-    
-    func playVideo() {
-        guard let path = Bundle.main.path(forResource: "gradient_60", ofType: "mp4") else {
-            return
-        }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.view.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        self.videoLayer.layer.addSublayer(playerLayer)
-        
-        player.play()
-        
-        videoLayer.bringSubviewToFront(mainLabel)
-        
-    }
-    
-    
+
 }
 
 
@@ -85,22 +96,39 @@ extension MainViewController: APIManangerDelegate {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return apiManager.imageURLsArray.count
+//        return viewModel.numberOfRowsInSection(section: section)
+         return apiManager.imageURLsArray.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         
         let imageURLString = apiManager.imageURLsArray[indexPath.row]
         cell.updateUI(image: imageURLString)
-    
+        
         cell.collectionCellDelegate = self
         cell.index = indexPath
         
         return cell
     }
     
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath) as! HeaderCollectionReusableView
+        
+        header.configure()
+        
+        return header
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.size.width, height: 200)
+    }
     
 }
 
@@ -109,6 +137,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - UICollectionViewDelegateFlowLayout
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
+
+    
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -116,18 +147,21 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         //2
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
+        let widthPerItem = availableWidth
+
+        return CGSize(width: widthPerItem, height: 370 )
         
-        return CGSize(width: widthPerItem, height: widthPerItem + 10)
     }
-    
-    //3
+
+    //3UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+
+
         return sectionInsets
     }
-    
+
     // 4
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -143,9 +177,16 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: CollectionViewNew {
     func onClickCellButton(index: IndexPath) {
         
-        performSegue(withIdentifier: "MainMenuToDetail", sender: index)
+        showType2(indexPath: index)
         
     }
+    
+    
+}
+
+
+
+extension MainViewController: CardsViewController {
     
     
 }

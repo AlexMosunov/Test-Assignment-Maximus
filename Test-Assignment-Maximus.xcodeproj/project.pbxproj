@@ -18,6 +18,7 @@
 		9A14353C252A1C60005F59D1 /* gradient_60.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9A14353B252A1C5E005F59D1 /* gradient_60.mp4 */; };
 		9A716A3F252B287F00E103C5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A716A3E252B287F00E103C5 /* MainViewController.swift */; };
 		9A716A41252B292600E103C5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A716A40252B292600E103C5 /* CollectionViewCell.swift */; };
+		9A716A4D252C7E7700E103C5 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */; };
 		9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE38B93252B0CB600BD8B98 /* DetailVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		9A14353B252A1C5E005F59D1 /* gradient_60.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = gradient_60.mp4; sourceTree = "<group>"; };
 		9A716A3E252B287F00E103C5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9A716A40252B292600E103C5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		9AE38B93252B0CB600BD8B98 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		C54585B1DA0FB3497F33C252 /* Pods-Test-Assignment-Maximus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-Assignment-Maximus.debug.xcconfig"; path = "Target Support Files/Pods-Test-Assignment-Maximus/Pods-Test-Assignment-Maximus.debug.xcconfig"; sourceTree = "<group>"; };
 		DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test_Assignment_Maximus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,9 +119,18 @@
 		9A1435322529E0A1005F59D1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9A716A4B252C7E4700E103C5 /* Header */,
 				9A716A40252B292600E103C5 /* CollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		9A716A4B252C7E4700E103C5 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		B1DF968F1CA37D20FFC1C21C /* Frameworks */ = {
@@ -247,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A14352E2529DB0A005F59D1 /* APIData.swift in Sources */,
+				9A716A4D252C7E7700E103C5 /* HeaderCollectionReusableView.swift in Sources */,
 				9A716A41252B292600E103C5 /* CollectionViewCell.swift in Sources */,
 				9A1435302529DB2C005F59D1 /* APIManager.swift in Sources */,
 				9A1435192529DA15005F59D1 /* AppDelegate.swift in Sources */,

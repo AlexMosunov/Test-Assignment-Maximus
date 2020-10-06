@@ -34,7 +34,7 @@ public class TransitionSettings {
     /// If true, will always allow user to scroll while it's animated.
     public var isEnabledAllowsUserInteractionWhileHighlightingCard = true
     
-    public var cardContainerInsets: UIEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    public var cardContainerInsets: UIEdgeInsets = UIEdgeInsets(top: 12.0, left: 16.0, bottom: 12.0, right: 16.0)
     
     public enum CardVerticalExpandingStyle {
         /// Expanding card pinning at the top of animatingContainerView

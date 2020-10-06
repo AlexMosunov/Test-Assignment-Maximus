@@ -8,6 +8,7 @@
 
 import UIKit
 import AppstoreTransition
+import AVFoundation
 
 protocol CollectionViewNew {
     func onClickCellButton(index: IndexPath)
@@ -19,9 +20,24 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var openButton: UIButton!
     @IBOutlet weak var newItemLabel: UILabel!
+    @IBOutlet weak var videoView: UIView!
     
     var collectionCellDelegate: CollectionViewNew?
     var index: IndexPath?
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        containerView.layer.cornerRadius = 8
+        containerView.clipsToBounds = true
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.1
+        layer.shadowOffset = .init(width: 0, height: 0)
+        layer.shadowRadius = 8
+    }
+    
     
     
     @IBAction func openButtonTapped(_ sender: UIButton) {
@@ -31,18 +47,9 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI(image: String?) {
-        newItemLabel.layer.masksToBounds = true
-        newItemLabel.layer.cornerRadius = newItemLabel.frame.height / 2
-        imageView.layer.cornerRadius = 15
-        openButton.layer.cornerRadius = openButton.frame.height / 2
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-            UIBlurEffect.Style.regular))
-        blur.frame = openButton.bounds
-        blur.isUserInteractionEnabled = false
-        blur.layer.cornerRadius = blur.frame.height / 2
-        blur.layer.masksToBounds = true
-        openButton.insertSubview(blur, at: 0)
-        
+        setLabelsUI()
+        containerView.layer.cornerRadius = 8
+        containerView.clipsToBounds = true
         guard let imageString = image else { return }
         
         guard let imageStringURL = URL(string: imageString) else { return }
@@ -50,6 +57,25 @@ class CollectionViewCell: UICollectionViewCell {
         self.imageView.image = nil
         getImageDataFrom(url: imageStringURL)
         
+    }
+    
+    
+
+    
+    func setLabelsUI() {
+        newItemLabel.layer.masksToBounds = true
+        newItemLabel.layer.cornerRadius = newItemLabel.frame.height / 2
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 8
+        openButton.layer.cornerRadius = openButton.frame.height / 2
+        
+        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
+            UIBlurEffect.Style.extraLight))
+        blur.frame = openButton.bounds
+        blur.isUserInteractionEnabled = false
+        blur.layer.cornerRadius = blur.frame.height / 2
+        blur.layer.masksToBounds = true
+        openButton.insertSubview(blur, at: 0)
     }
     
     // MARK: - Get image data
@@ -67,12 +93,59 @@ class CollectionViewCell: UICollectionViewCell {
              
              DispatchQueue.main.async {
                  if let image = UIImage(data: data) {
-                     self.imageView.image = image
+                    self.imageView.image = image.resized(withPercentage: 0.5)
                  }
              }
          }.resume()
      }
     
+    
+    // Make it appears very responsive to touch
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//        animate(isHighlighted: true)
+//    }
+//    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesEnded(touches, with: event)
+//        animate(isHighlighted: false)
+//    }
+//    
+//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesCancelled(touches, with: event)
+//        animate(isHighlighted: false)
+//    }
+
 
 }
 
+
+extension CollectionViewCell: CardCollectionViewCell {
+    
+    var cardContentView: UIView {
+        get {
+            return containerView
+        }
+    }
+    
+}
+
+
+extension UIImage {
+    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+}

@@ -12,16 +12,29 @@ import AppstoreTransition
 class DetailVC: UIViewController {
 
 
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     var apiManager: APIManager?
     var index: IndexPath?
     
+    var picture: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
+        view.clipsToBounds = true
+        contentScrollView.delegate = self
+        
+        scrollView.contentInsetAdjustmentBehavior = .never
+        
+        let _ = dismissHandler
+
         loadImage()
+        setUI()
+   
     }
     
     
@@ -41,17 +54,22 @@ class DetailVC: UIViewController {
     
     
     func loadImage() {
-        if let index = index {
-            guard let imageURLString = apiManager?.imageURLsArray[index.row] else {return }
-            guard let url = URL(string: imageURLString) else {return}
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    DispatchQueue.main.async {
-                        self.imageView.image = UIImage(data: data)
-                    }
-                }
-            }
-        }        
+        if let picture = picture {
+            self.imageView.image = picture.resized(withPercentage: 0.5)
+        }
+        
+        
+//        if let index = index {
+//            guard let imageURLString = apiManager?.imageURLsArray[index.row] else {return }
+//            guard let url = URL(string: imageURLString) else {return}
+//            DispatchQueue.global().async {
+//                if let data = try? Data(contentsOf: url) {
+//                    DispatchQueue.main.async {
+//                        self.imageView.image = UIImage(data: data)
+//                    }
+//                }
+//            }
+//        }
     }
     
     
@@ -64,3 +82,28 @@ class DetailVC: UIViewController {
 
 }
 
+
+extension DetailVC: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // prevent bouncing when swiping down to close
+        scrollView.bounces = scrollView.contentOffset.y > 100
+        
+        dismissHandler.scrollViewDidScroll(scrollView)
+    }
+    
+}
+
+
+extension DetailVC: CardDetailViewController {
+    var scrollView: UIScrollView {
+        return contentScrollView
+    }
+    
+    
+    
+    var cardContentView: UIView {
+        return headerView
+    }
+
+}
