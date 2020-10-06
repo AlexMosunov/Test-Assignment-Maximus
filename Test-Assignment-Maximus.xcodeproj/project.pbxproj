@@ -20,6 +20,7 @@
 		9A716A41252B292600E103C5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A716A40252B292600E103C5 /* CollectionViewCell.swift */; };
 		9A716A4D252C7E7700E103C5 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */; };
 		9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE38B93252B0CB600BD8B98 /* DetailVC.swift */; };
+		9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEFEF08252CC944003562C6 /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		9A716A40252B292600E103C5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		9AE38B93252B0CB600BD8B98 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		9AEFEF08252CC944003562C6 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C54585B1DA0FB3497F33C252 /* Pods-Test-Assignment-Maximus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-Assignment-Maximus.debug.xcconfig"; path = "Target Support Files/Pods-Test-Assignment-Maximus/Pods-Test-Assignment-Maximus.debug.xcconfig"; sourceTree = "<group>"; };
 		DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test_Assignment_Maximus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF86513A356A2CB08EED4ABD /* Pods-Test-Assignment-Maximus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-Assignment-Maximus.release.xcconfig"; path = "Target Support Files/Pods-Test-Assignment-Maximus/Pods-Test-Assignment-Maximus.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				9A14352D2529DB0A005F59D1 /* APIData.swift */,
 				9A14352F2529DB2C005F59D1 /* APIManager.swift */,
+				9AEFEF08252CC944003562C6 /* DataModel.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				9A14351B2529DA15005F59D1 /* SceneDelegate.swift in Sources */,
 				9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */,
 				9A716A3F252B287F00E103C5 /* MainViewController.swift in Sources */,
+				9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 protocol APIManangerDelegate {
-    func didUpdateData(_ DataManager: APIManager, data: [String])
+    func didUpdateData(_ DataManager: APIManager, data: [DataModel])
 }
 
 class APIManager {
     
     let APIurl = "https://pair.maximusapps.top/api/get-all-pairs"
-    var imageURLsArray: [String] = []
+    var imageURLsArray: [DataModel] = []
     var imagesArray: [UIImage] = []
     
     var delegate: APIManangerDelegate?
@@ -52,19 +52,23 @@ class APIManager {
     
     
     
-    func parseJSON(data: Data) -> [String]? {
+    func parseJSON(data: Data) -> [DataModel]? {
         
         let prefixURL = "https://pair.maximusapps.top/storage/"
-        var imageURLs: [String] = []
+        var imageURLs: [DataModel] = []
         
         let decoder = JSONDecoder()
         
         do {
             let decodedData = try decoder.decode(APIData.self, from: data)
-            print("decodedData - \(decodedData)")
-//            imageURLs = decodedData
+
             for object in decodedData.data {
-                imageURLs.append("\(prefixURL)\(object.image_1)")
+                let id = object.id
+                let imageUrl = object.image_1
+                
+                let object = DataModel(id: id, url: "\(prefixURL)\(imageUrl)")
+                
+                imageURLs.append(object)
             }
             
             return imageURLs

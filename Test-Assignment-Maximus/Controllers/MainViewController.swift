@@ -61,7 +61,7 @@ class MainViewController: UIViewController {
         
         
         let imageURLString = apiManager.imageURLsArray[indexPath.row]
-        guard let url = URL(string: imageURLString) else {return}
+        guard let url = URL(string: imageURLString.url) else {return}
         
         if let data = try? Data(contentsOf: url) {
             viewController.picture = UIImage(data: data)
@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
 //MARK: - APIManangerDelegate
 
 extension MainViewController: APIManangerDelegate {
-    func didUpdateData(_ DataManager: APIManager, data: [String]) {
+    func didUpdateData(_ DataManager: APIManager, data: [DataModel]) {
         
         self.apiManager.imageURLsArray += data
         
@@ -104,7 +104,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         
         let imageURLString = apiManager.imageURLsArray[indexPath.row]
-        cell.updateUI(image: imageURLString)
+        cell.updateUI(image: imageURLString.url)
         
         cell.collectionCellDelegate = self
         cell.index = indexPath
