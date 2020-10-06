@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AppstoreTransition
+import Kingfisher
 
 class MainViewController: UIViewController {
     
@@ -43,6 +44,9 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         
+        // pass image
+
+        
         // Get tapped cell location
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
         cell.settings.cardContainerInsets = sectionInsets
@@ -59,15 +63,18 @@ class MainViewController: UIViewController {
         viewController.apiManager = apiManager
         viewController.index = indexPath
         
+        // pass image
         
         let imageURLString = apiManager.imageURLsArray[indexPath.row]
         guard let url = URL(string: imageURLString.url) else {return}
-        
-        if let data = try? Data(contentsOf: url) {
-            viewController.picture = UIImage(data: data)
-        }
+//        viewController.imageView.kf.setImage(with: url)
+//
+//        if let data = try? Data(contentsOf: url) {
+//            viewController.picture = UIImage(data: data)
+//        }
         
         presentExpansion(viewController, cell: cell, animated: true)
+        viewController.imageView.kf.setImage(with: url)
     }
     
     

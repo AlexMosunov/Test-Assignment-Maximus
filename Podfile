@@ -7,5 +7,6 @@ target 'Test-Assignment-Maximus' do
 
   # Pods for Test-Assignment-Maximus
   pod 'appstore-card-transition'
+  pod 'Kingfisher'
 
 end

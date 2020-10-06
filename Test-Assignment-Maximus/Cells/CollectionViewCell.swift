@@ -9,6 +9,7 @@
 import UIKit
 import AppstoreTransition
 import AVFoundation
+import Kingfisher
 
 protocol CollectionViewNew {
     func onClickCellButton(index: IndexPath)
@@ -20,7 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var openButton: UIButton!
     @IBOutlet weak var newItemLabel: UILabel!
-    @IBOutlet weak var videoView: UIView!
+
     
     var collectionCellDelegate: CollectionViewNew?
     var index: IndexPath?
@@ -62,7 +63,8 @@ class CollectionViewCell: UICollectionViewCell {
         
         guard let imageStringURL = URL(string: imageString) else { return }
         
-        getImageDataFrom(url: imageStringURL)
+        imageView.kf.setImage(with: imageStringURL)
+//        getImageDataFrom(url: imageStringURL)
         
     }
     

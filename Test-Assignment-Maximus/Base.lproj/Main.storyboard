@@ -34,14 +34,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sV0-fp-WpB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="344"/>
+                                                    <rect key="frame" x="8" y="0.0" width="348" height="344"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OcM-f8-Xzf">
-                                                            <rect key="frame" x="0.0" y="0.0" width="364" height="344"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="348" height="344"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fft-eY-pAw">
-                                                            <rect key="frame" x="131.5" y="276" width="101" height="44"/>
+                                                            <rect key="frame" x="123.5" y="276" width="101" height="44"/>
                                                             <color key="backgroundColor" red="0.2815474302" green="0.2815474302" blue="0.2815474302" alpha="0.21040239729999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="0NW-vV-4pc"/>
@@ -82,9 +82,9 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="sV0-fp-WpB" firstAttribute="leading" secondItem="elI-8y-0Br" secondAttribute="leading" id="Ava-Md-jJG"/>
+                                                <constraint firstItem="sV0-fp-WpB" firstAttribute="leading" secondItem="elI-8y-0Br" secondAttribute="leading" constant="8" id="Ava-Md-jJG"/>
                                                 <constraint firstAttribute="bottom" secondItem="sV0-fp-WpB" secondAttribute="bottom" id="ENu-j1-EBj"/>
-                                                <constraint firstAttribute="trailing" secondItem="sV0-fp-WpB" secondAttribute="trailing" id="dEO-Ml-AS3"/>
+                                                <constraint firstAttribute="trailing" secondItem="sV0-fp-WpB" secondAttribute="trailing" constant="8" id="dEO-Ml-AS3"/>
                                                 <constraint firstItem="sV0-fp-WpB" firstAttribute="top" secondItem="elI-8y-0Br" secondAttribute="top" id="r96-1a-nmF"/>
                                             </constraints>
                                         </collectionViewCellContentView>

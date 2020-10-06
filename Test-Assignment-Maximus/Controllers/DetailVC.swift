@@ -8,6 +8,7 @@
 
 import UIKit
 import AppstoreTransition
+import Kingfisher
 
 class DetailVC: UIViewController {
 
@@ -56,16 +57,19 @@ class DetailVC: UIViewController {
     
     func loadImage() {
         if let picture = picture {
+//            imageView.kf.se
             DispatchQueue.main.async {
-                self.imageView.image = picture.resized(withPercentage: 0.5)
+//                self.imageView.image = picture.resized(withPercentage: 0.5)
             }
-            
+
         }
         
-        
+//
 //        if let index = index {
 //            guard let imageURLString = apiManager?.imageURLsArray[index.row] else {return }
-//            guard let url = URL(string: imageURLString) else {return}
+//            guard let url = URL(string: imageURLString.url) else {return}
+//            imageView.kf.setImage(with: url)
+//        }
 //            DispatchQueue.global().async {
 //                if let data = try? Data(contentsOf: url) {
 //                    DispatchQueue.main.async {
