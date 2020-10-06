@@ -54,7 +54,7 @@ class CollectionViewCell: UICollectionViewCell {
         
         guard let imageStringURL = URL(string: imageString) else { return }
         
-        self.imageView.image = nil
+//        self.imageView.image = nil
         getImageDataFrom(url: imageStringURL)
         
     }
@@ -69,13 +69,13 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 8
         openButton.layer.cornerRadius = openButton.frame.height / 2
         
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-            UIBlurEffect.Style.extraLight))
-        blur.frame = openButton.bounds
-        blur.isUserInteractionEnabled = false
-        blur.layer.cornerRadius = blur.frame.height / 2
-        blur.layer.masksToBounds = true
-        openButton.insertSubview(blur, at: 0)
+//        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
+//            UIBlurEffect.Style.extraLight))
+//        blur.frame = openButton.bounds
+//        blur.isUserInteractionEnabled = false
+//        blur.layer.cornerRadius = blur.frame.height / 2
+//        blur.layer.masksToBounds = true
+//        openButton.insertSubview(blur, at: 0)
     }
     
     // MARK: - Get image data
