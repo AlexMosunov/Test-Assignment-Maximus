@@ -45,6 +45,8 @@ class CollectionViewCell: UICollectionViewCell {
         blur.layer.cornerRadius = blur.frame.height / 2
         blur.layer.masksToBounds = true
         openButton.insertSubview(blur, at: 0)
+        
+        
     }
     
     
@@ -64,8 +66,7 @@ class CollectionViewCell: UICollectionViewCell {
         guard let imageStringURL = URL(string: imageString) else { return }
         
         imageView.kf.setImage(with: imageStringURL)
-//        getImageDataFrom(url: imageStringURL)
-        
+  
     }
     
     
@@ -81,43 +82,6 @@ class CollectionViewCell: UICollectionViewCell {
 
     }
     
-    // MARK: - Get image data
-    private func getImageDataFrom(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("DataTask error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else {
-                print("Empty Data")
-                 return
-             }
-             
-             DispatchQueue.main.async {
-                 if let image = UIImage(data: data) {
-                    self.imageView.image = image.resized(withPercentage: 0.5)
-                 }
-             }
-         }.resume()
-     }
-    
-    
-    // Make it appears very responsive to touch
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesBegan(touches, with: event)
-//        animate(isHighlighted: true)
-//    }
-//    
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesEnded(touches, with: event)
-//        animate(isHighlighted: false)
-//    }
-//    
-//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesCancelled(touches, with: event)
-//        animate(isHighlighted: false)
-//    }
 
 
 }

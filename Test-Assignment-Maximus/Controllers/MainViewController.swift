@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
     private var transition: CardTransition?
     var fetchingMore = false
     
-    let sectionInsets = UIEdgeInsets(top: 12.0, left: 16.0, bottom: 12.0, right:16.0)
+    let sectionInsets = UIEdgeInsets(top: 9.0, left: 11.0, bottom: 9.0, right: 11.0)
     let itemsPerRow: CGFloat = 1
     
     
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
         viewController.transitioningDelegate = transition
         
         // If `modalPresentationStyle` is not `.fullScreen`, this should be set to true to make status bar depends on presented vc.
-        viewController.modalPresentationCapturesStatusBarAppearance = true
+//        viewController.modalPresentationCapturesStatusBarAppearance = true
         viewController.modalPresentationStyle = .custom
         
         viewController.apiManager = apiManager
@@ -67,12 +67,7 @@ class MainViewController: UIViewController {
         
         let imageURLString = apiManager.imageURLsArray[indexPath.row]
         guard let url = URL(string: imageURLString.url) else {return}
-//        viewController.imageView.kf.setImage(with: url)
-//
-//        if let data = try? Data(contentsOf: url) {
-//            viewController.picture = UIImage(data: data)
-//        }
-        
+
         presentExpansion(viewController, cell: cell, animated: true)
         viewController.imageView.kf.setImage(with: url)
     }
@@ -161,8 +156,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.fetchingMore = false
         }
-        
-        print("begin update")
+
     }
     
 }
@@ -183,8 +177,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth
-        
-        return CGSize(width: widthPerItem, height: 370 )
+
+        return CGSize(width: widthPerItem, height: 420 )
         
     }
     

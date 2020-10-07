@@ -34,7 +34,6 @@ class DetailVC: UIViewController {
         
         let _ = dismissHandler
 
-        loadImage()
         setUI()
    
     }
@@ -51,34 +50,11 @@ class DetailVC: UIViewController {
         blur.layer.masksToBounds = true
         cancelButton.insertSubview(blur, at: 0)
         cancelButton.bringSubviewToFront(cancelButton.imageView!)
+        imageView.layer.cornerRadius = 10
         
     }
     
     
-    func loadImage() {
-        if let picture = picture {
-//            imageView.kf.se
-            DispatchQueue.main.async {
-//                self.imageView.image = picture.resized(withPercentage: 0.5)
-            }
-
-        }
-        
-//
-//        if let index = index {
-//            guard let imageURLString = apiManager?.imageURLsArray[index.row] else {return }
-//            guard let url = URL(string: imageURLString.url) else {return}
-//            imageView.kf.setImage(with: url)
-//        }
-//            DispatchQueue.global().async {
-//                if let data = try? Data(contentsOf: url) {
-//                    DispatchQueue.main.async {
-//                        self.imageView.image = UIImage(data: data)
-//                    }
-//                }
-//            }
-//        }
-    }
     
     
     

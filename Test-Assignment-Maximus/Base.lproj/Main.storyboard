@@ -34,14 +34,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sV0-fp-WpB">
-                                                    <rect key="frame" x="8" y="0.0" width="348" height="344"/>
+                                                    <rect key="frame" x="11" y="9" width="342" height="326"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OcM-f8-Xzf">
-                                                            <rect key="frame" x="0.0" y="0.0" width="348" height="344"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="326"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fft-eY-pAw">
-                                                            <rect key="frame" x="123.5" y="276" width="101" height="44"/>
+                                                            <rect key="frame" x="120.5" y="258" width="101" height="44"/>
                                                             <color key="backgroundColor" red="0.2815474302" green="0.2815474302" blue="0.2815474302" alpha="0.21040239729999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="0NW-vV-4pc"/>
@@ -82,10 +82,10 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="sV0-fp-WpB" firstAttribute="leading" secondItem="elI-8y-0Br" secondAttribute="leading" constant="8" id="Ava-Md-jJG"/>
-                                                <constraint firstAttribute="bottom" secondItem="sV0-fp-WpB" secondAttribute="bottom" id="ENu-j1-EBj"/>
-                                                <constraint firstAttribute="trailing" secondItem="sV0-fp-WpB" secondAttribute="trailing" constant="8" id="dEO-Ml-AS3"/>
-                                                <constraint firstItem="sV0-fp-WpB" firstAttribute="top" secondItem="elI-8y-0Br" secondAttribute="top" id="r96-1a-nmF"/>
+                                                <constraint firstItem="sV0-fp-WpB" firstAttribute="leading" secondItem="elI-8y-0Br" secondAttribute="leading" constant="11" id="Ava-Md-jJG"/>
+                                                <constraint firstAttribute="bottom" secondItem="sV0-fp-WpB" secondAttribute="bottom" constant="9" id="ENu-j1-EBj"/>
+                                                <constraint firstAttribute="trailing" secondItem="sV0-fp-WpB" secondAttribute="trailing" constant="11" id="dEO-Ml-AS3"/>
+                                                <constraint firstItem="sV0-fp-WpB" firstAttribute="top" secondItem="elI-8y-0Br" secondAttribute="top" constant="9" id="r96-1a-nmF"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -128,13 +128,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BzJ-Gj-kdc">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="422"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="405"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BX6-be-HBO">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="422"/>
-                                                <color key="backgroundColor" red="0.38024074839999999" green="0.78039215689999997" blue="0.37158168429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="405"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="422" id="ABG-Pr-vlv"/>
+                                                    <constraint firstAttribute="height" constant="405" id="ABG-Pr-vlv"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-rF-atL">
@@ -153,7 +153,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="BX6-be-HBO" firstAttribute="leading" secondItem="BzJ-Gj-kdc" secondAttribute="leading" id="F9e-H3-LmV"/>
                                             <constraint firstItem="BX6-be-HBO" firstAttribute="centerX" secondItem="BzJ-Gj-kdc" secondAttribute="centerX" id="Z8C-Hv-bgl"/>
@@ -165,10 +165,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2O2-LW-LuX">
-                                        <rect key="frame" x="0.0" y="422" width="414" height="480"/>
+                                        <rect key="frame" x="0.0" y="405" width="414" height="495"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Серый текст в левом нижнем углу экрана" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcS-42-vBt">
-                                                <rect key="frame" x="16" y="398" width="335.5" height="20"/>
+                                                <rect key="frame" x="16" y="413" width="335.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -193,7 +193,7 @@
                                             <constraint firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="62" id="Rz7-GS-fhd"/>
                                             <constraint firstItem="PnE-Le-lK9" firstAttribute="centerX" secondItem="2O2-LW-LuX" secondAttribute="centerX" id="gKc-nZ-1j8"/>
                                             <constraint firstItem="GcS-42-vBt" firstAttribute="leading" secondItem="2O2-LW-LuX" secondAttribute="leading" constant="16" id="hdC-QO-AJZ"/>
-                                            <constraint firstAttribute="height" constant="480" id="o9M-95-YiJ"/>
+                                            <constraint firstAttribute="height" constant="495" id="o9M-95-YiJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
