@@ -24,7 +24,6 @@ class DetailVC: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var watchButton: UIButton!
-    @IBOutlet weak var scrollViewNew: UIScrollView!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var gestureView: UIView!
     @IBOutlet weak var wallpaperImageTwo: UIImageView!
@@ -41,9 +40,10 @@ class DetailVC: UIViewController {
     
     var numberOfTaps = 0
     
+    var spinnerView: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
         
         view.clipsToBounds = true
         contentScrollView.delegate = self
@@ -56,12 +56,6 @@ class DetailVC: UIViewController {
         let _ = dismissHandler
 
         setUI()
-        
-        
-//        setPreviewImages()
-//        if let id = wallpaperObject?.id {
-//            apiManager?.postRequest(id: id)
-//        }
         
    
     }
@@ -110,18 +104,34 @@ class DetailVC: UIViewController {
         if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {
             print("wallpaperObject.image_1 - \(wallpaperObject.image_1)")
             guard let urlOne = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)") else {return}
+//            DispatchQueue.global().async {
+//                        if let data = try? Data(contentsOf: urlOne) {
+//                            if let image = UIImage(data: data) {
+//                                DispatchQueue.main.async {
+//                                    self.wallpaperImageOne.image = image
+//                                    self.activityIndicator(isEnabled: false)
+//                                }
+//                            }
+//                        }
+//                    }
+        
+
+            wallpaperImageOne.kf.indicatorType = .activity
             wallpaperImageOne.kf.setImage(with: urlOne)
+            
             guard let urlTwo = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_2)") else {return}
             wallpaperImageTwo.kf.setImage(with: urlTwo)
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImage(sender:)))
             gestureView.addGestureRecognizer(tapGesture)
+//            activityIndicator(isEnabled: false)
         }
     }
     
     
     @IBAction func watchButtonTapped(_ sender: UIButton) {
-        print("BUTTON TAPPED")
+//        activityIndicator(isEnabled: true)
+        
         setPreviewImages()
         gestureView.alpha = 1.0
         wallpaperImageOne.alpha = 1.0
@@ -161,20 +171,25 @@ class DetailVC: UIViewController {
         default:
             print("error with preview images")
         }
-        
-        
-//        print("hello")
 
     }
     
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "FromDetailsToPreview" {
-//            let destVC = segue.destination as! PreviewVC
-//            destVC.apiManager = apiManager
-//
-//        }
-//    }
+    func activityIndicator(isEnabled: Bool) {
+        if isEnabled {
+            spinnerView = UIView(frame: self.view.bounds)
+            spinnerView?.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+            let ai = UIActivityIndicatorView(style: .large)
+            ai.center = spinnerView!.center
+            spinnerView?.addSubview(ai)
+            self.view.addSubview(spinnerView!)
+            ai.startAnimating()
+        } else {
+            spinnerView?.removeFromSuperview()
+            spinnerView = nil
+        }
+        
+        
+    }
     
 
 }
