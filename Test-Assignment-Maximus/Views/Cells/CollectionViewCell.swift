@@ -58,8 +58,7 @@ class CollectionViewCell: UICollectionViewCell {
   
 
     @IBAction func openButtonTapped(_ sender: UIButton) {
-//        newItemLabel.alpha = 0.0
-//        openButton.alpha = 0.0
+
         if let index = index {
             collectionCellDelegate?.onClickCellButton(index: index)
         }
