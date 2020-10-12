@@ -29,9 +29,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        containerView.layer.cornerRadius = 8
-        containerView.clipsToBounds = true
         
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.1
@@ -66,7 +63,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     func updateUI(image: String?) {
         setLabelsUI()
-        containerView.layer.cornerRadius = 8
+        containerView.layer.cornerRadius = 15
         containerView.clipsToBounds = true
         guard let imageString = image else { return }
         
@@ -83,7 +80,7 @@ class CollectionViewCell: UICollectionViewCell {
         newItemLabel.layer.masksToBounds = true
         newItemLabel.layer.cornerRadius = newItemLabel.frame.height / 2
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 8
+        imageView.layer.cornerRadius = 15
         openButton.layer.cornerRadius = openButton.frame.height / 2
         
 

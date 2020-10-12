@@ -71,7 +71,6 @@ class DetailVC: UIViewController {
     
     
     func setUI() {
-        print("UI")
         watchButton.layer.cornerRadius = watchButton.frame.height / 2
         cancelButton.layer.cornerRadius = 50
         let blur = UIVisualEffectView(effect: UIBlurEffect(style:
@@ -84,8 +83,6 @@ class DetailVC: UIViewController {
         cancelButton.bringSubviewToFront(cancelButton.imageView!)
         cancelButton.alpha = 1.0
         imageView.layer.cornerRadius = 10
-        
-        
         
         
     }
@@ -123,10 +120,7 @@ extension DetailVC: UIScrollViewDelegate {
             let percent = scrollView.contentOffset.y / 100
             cancelButton.alpha = 1.0 - percent
         }
-        
-        
-        print(scrollView.contentOffset.y)
-        
+                
     }
     
 

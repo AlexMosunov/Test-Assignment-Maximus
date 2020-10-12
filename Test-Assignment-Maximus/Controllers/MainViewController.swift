@@ -39,12 +39,12 @@ class MainViewController: UIViewController {
         
         
         // Set CollectionView Flow Layout for Header and Items
-        let flowLayout = CollectionFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: 100, height: 100)
-        flowLayout.minimumLineSpacing = 1.0
-        flowLayout.minimumInteritemSpacing = 1.0
-        collectionView.collectionViewLayout = flowLayout
+//        let flowLayout = CollectionFlowLayout()
+//        flowLayout.scrollDirection = .vertical
+//        flowLayout.itemSize = CGSize(width: 100, height: 100)
+//        flowLayout.minimumLineSpacing = 1.0
+//        flowLayout.minimumInteritemSpacing = 1.0
+//        collectionView.collectionViewLayout = flowLayout
         
     }
     
@@ -100,8 +100,8 @@ class MainViewController: UIViewController {
         
         // pass image
         
-        let imageURLString = apiManager.imageURLsArray[indexPath.row]
-        guard let url = URL(string: imageURLString.url) else {return}
+        let imageObject = apiManager.imageObjectsArray[indexPath.row]
+        guard let url = URL(string: imageObject.url) else {return}
 
         presentExpansion(viewController, cell: cell, animated: true)
         viewController.imageView.kf.setImage(with: url)
@@ -116,7 +116,7 @@ class MainViewController: UIViewController {
 extension MainViewController: APIManangerDelegate {
     func didUpdateData(_ DataManager: APIManager, data: [DataModel]) {
         
-        self.apiManager.imageURLsArray += data
+        self.apiManager.imageObjectsArray += data
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -131,7 +131,7 @@ extension MainViewController: APIManangerDelegate {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        return viewModel.numberOfRowsInSection(section: section)
-        return apiManager.imageURLsArray.count
+        return apiManager.imageObjectsArray.count
     }
     
     
@@ -140,7 +140,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         
-        let imageURLString = apiManager.imageURLsArray[indexPath.row]
+        let imageURLString = apiManager.imageObjectsArray[indexPath.row]
         cell.updateUI(image: imageURLString.url)
         
         cell.collectionCellDelegate = self
@@ -155,6 +155,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath) as! HeaderCollectionReusableView
         
+//        header.imageView.image = UIImage(named: "pic1")
         header.configure()
         
         return header
@@ -168,18 +169,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         showType2(indexPath: indexPath)
+        let imageObject = apiManager.imageObjectsArray[indexPath.row]
+        print("OBJECT'S ID - \(imageObject.id)")
+        apiManager.postRequest(id: imageObject.id)
     }
     
 
-//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-//
-//        UIView.animate(withDuration: 1.4) {
-//            cell.newItemLabel.alpha = 1.0
-//            cell.openButton.alpha = 1.0
-//        }
-//    }
-//
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offseetY = scrollView.contentOffset.y
@@ -201,8 +196,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func beginBatchFetch() {
         fetchingMore = true
+
+        if apiManager.nextPage != nil {
+            self.apiManager.postRequest()
+        }
         
-        self.apiManager.postRequest()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.fetchingMore = false
@@ -266,7 +264,6 @@ extension MainViewController: CollectionViewNew {
 
 extension MainViewController: Details {
     func passCellIndex(index: IndexPath) {
-        print("INDEX - \(index)")
         indexOfCell = index
     }
     

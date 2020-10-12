@@ -10,11 +10,12 @@ import Foundation
 
 
 struct APIData: Codable {
-    let current_page: Int
-    let data: [myData]
+//    let current_page: Int
+    let data: [myData]?
+    let next_page_url: String?
 }
 
 struct myData: Codable {
     let id: Int
-    let image_1: String
+    let image_3: String
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A1939CF388768539105C4FC /* Pods_Test_Assignment_Maximus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */; };
+		81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EF972534653D002E1509 /* PairAPIData.swift */; };
 		9A1435192529DA15005F59D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1435182529DA15005F59D1 /* AppDelegate.swift */; };
 		9A14351B2529DA15005F59D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A14351A2529DA15005F59D1 /* SceneDelegate.swift */; };
 		9A1435202529DA15005F59D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A14351E2529DA15005F59D1 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81D5EF972534653D002E1509 /* PairAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairAPIData.swift; sourceTree = "<group>"; };
 		9A1435152529DA15005F59D1 /* Test-Assignment-Maximus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test-Assignment-Maximus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1435182529DA15005F59D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A14351A2529DA15005F59D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		81D5EF9B253465C1002E1509 /* JSONDecoders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JSONDecoders;
+			sourceTree = "<group>";
+		};
 		9A14350C2529DA15005F59D1 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				9A14352D2529DB0A005F59D1 /* APIData.swift */,
+				81D5EF972534653D002E1509 /* PairAPIData.swift */,
+				81D5EF9B253465C1002E1509 /* JSONDecoders */,
 				9A14352F2529DB2C005F59D1 /* APIManager.swift */,
 				9AEFEF08252CC944003562C6 /* DataModel.swift */,
 			);
@@ -280,6 +291,7 @@
 				9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */,
 				9A716A3F252B287F00E103C5 /* MainViewController.swift in Sources */,
 				9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */,
+				81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */,
 				9AF4DB3B25338E440007F7D4 /* CollectionFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

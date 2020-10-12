@@ -41,7 +41,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     
     private let videoView: UIView = {
         let videoView = UIView()
-        videoView.backgroundColor = .blue
+//        videoView.backgroundColor = .blue
 
         return videoView
         
@@ -53,6 +53,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         videoView.addSubview(label)
         videoView.frame = bounds
         label.frame = bounds
+        label.clipsToBounds = true
         
         videoView.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +67,8 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         
         label.leftAnchor.constraint(equalTo: videoView.leftAnchor, constant: 26).isActive = true
         label.rightAnchor.constraint(equalTo: videoView.rightAnchor, constant: 16).isActive = true
-        label.topAnchor.constraint(equalTo: videoView.topAnchor, constant: 88).isActive = true
+        label.topAnchor.constraint(equalTo: videoView.topAnchor, constant: 100).isActive = true
+//        label.bottomAnchor.constraint(equalTo: videoView.bottomAnchor, constant: 10).isActive = true
         
         playVideo()
     }
