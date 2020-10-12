@@ -26,6 +26,9 @@ class DetailVC: UIViewController {
     @IBOutlet weak var watchButton: UIButton!
     @IBOutlet weak var scrollViewNew: UIScrollView!
     @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var gestureView: UIView!
+    @IBOutlet weak var wallpaperImageTwo: UIImageView!
+    @IBOutlet weak var wallpaperImageOne: UIImageView!
     
     
     var apiManager: APIManager?
@@ -34,25 +37,41 @@ class DetailVC: UIViewController {
     var picture: UIImage?
     var detailsDelegate: Details?
     
+    var wallpaperObject: DataModel?
+    
+    var numberOfTaps = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
+        
         view.clipsToBounds = true
         contentScrollView.delegate = self
-//        scrollViewNew.isScrollEnabled = false
         
         let scrollSize = CGSize(width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = scrollSize
-        
+
         scrollView.contentInsetAdjustmentBehavior = .never
-        
+
         let _ = dismissHandler
 
         setUI()
+        
+        
+//        setPreviewImages()
+//        if let id = wallpaperObject?.id {
+//            apiManager?.postRequest(id: id)
+//        }
+        
    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        gestureView.alpha = 0
+        wallpaperImageOne.alpha = 0
+        wallpaperImageTwo.alpha = 0
+
         authorLabel.alpha = 0.0
         UIView.animate(withDuration: 0.7) {
             self.authorLabel.alpha = 1.0
@@ -84,18 +103,35 @@ class DetailVC: UIViewController {
         cancelButton.alpha = 1.0
         imageView.layer.cornerRadius = 10
         
-        
     }
     
     
+    func setPreviewImages() {
+        if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {
+            print("wallpaperObject.image_1 - \(wallpaperObject.image_1)")
+            guard let urlOne = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)") else {return}
+            wallpaperImageOne.kf.setImage(with: urlOne)
+            guard let urlTwo = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_2)") else {return}
+            wallpaperImageTwo.kf.setImage(with: urlTwo)
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImage(sender:)))
+            gestureView.addGestureRecognizer(tapGesture)
+        }
+    }
+    
     
     @IBAction func watchButtonTapped(_ sender: UIButton) {
-        print("")
+        print("BUTTON TAPPED")
+        setPreviewImages()
+        gestureView.alpha = 1.0
+        wallpaperImageOne.alpha = 1.0
+        wallpaperImageTwo.alpha = 1.0
+        
+
     }
     
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-        
         
         UIView.animate(withDuration: 0.4) {
             self.cancelButton.alpha = 0.0
@@ -103,7 +139,43 @@ class DetailVC: UIViewController {
         self.dismiss(animated: true)
     }
     
+    
+    
+    @objc func handleTapOnImage(sender: UITapGestureRecognizer) {
+        
+        numberOfTaps += 1
+        
+        switch numberOfTaps {
+        case 1:
+            print(111)
+            UIView.animate(withDuration: 0.2) {
+                self.wallpaperImageOne.alpha = 0.0
+            }
+        case 2:
+            print(222)
+            UIView.animate(withDuration: 0.2) {
+                self.wallpaperImageTwo.alpha = 0.0
+            }
+            numberOfTaps = 0
+            gestureView.alpha = 0.0
+        default:
+            print("error with preview images")
+        }
+        
+        
+//        print("hello")
 
+    }
+    
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "FromDetailsToPreview" {
+//            let destVC = segue.destination as! PreviewVC
+//            destVC.apiManager = apiManager
+//
+//        }
+//    }
+    
 
 }
 

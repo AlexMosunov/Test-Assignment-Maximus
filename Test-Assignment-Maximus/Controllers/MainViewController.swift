@@ -98,9 +98,13 @@ class MainViewController: UIViewController {
         viewController.index = indexPath
         viewController.detailsDelegate = self
         
-        // pass image
+        
         
         let imageObject = apiManager.imageObjectsArray[indexPath.row]
+        apiManager.postRequest(id: imageObject.id)
+        
+        viewController.wallpaperObject = imageObject
+        
         guard let url = URL(string: imageObject.url) else {return}
 
         presentExpansion(viewController, cell: cell, animated: true)
@@ -170,7 +174,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         showType2(indexPath: indexPath)
         let imageObject = apiManager.imageObjectsArray[indexPath.row]
-        print("OBJECT'S ID - \(imageObject.id)")
         apiManager.postRequest(id: imageObject.id)
     }
     

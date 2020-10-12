@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A1939CF388768539105C4FC /* Pods_Test_Assignment_Maximus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */; };
 		81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EF972534653D002E1509 /* PairAPIData.swift */; };
+		81D5EFA025346ECC002E1509 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EF9F25346ECC002E1509 /* PreviewVC.swift */; };
+		81D5EFAB253475CE002E1509 /* WallpaperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EFAA253475CE002E1509 /* WallpaperData.swift */; };
 		9A1435192529DA15005F59D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1435182529DA15005F59D1 /* AppDelegate.swift */; };
 		9A14351B2529DA15005F59D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A14351A2529DA15005F59D1 /* SceneDelegate.swift */; };
 		9A1435202529DA15005F59D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A14351E2529DA15005F59D1 /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		81D5EF972534653D002E1509 /* PairAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairAPIData.swift; sourceTree = "<group>"; };
+		81D5EF9F25346ECC002E1509 /* PreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
+		81D5EFAA253475CE002E1509 /* WallpaperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperData.swift; sourceTree = "<group>"; };
 		9A1435152529DA15005F59D1 /* Test-Assignment-Maximus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test-Assignment-Maximus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1435182529DA15005F59D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A14351A2529DA15005F59D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 		81D5EF9B253465C1002E1509 /* JSONDecoders */ = {
 			isa = PBXGroup;
 			children = (
+				9A14352D2529DB0A005F59D1 /* APIData.swift */,
+				81D5EF972534653D002E1509 /* PairAPIData.swift */,
 			);
 			path = JSONDecoders;
 			sourceTree = "<group>";
@@ -112,11 +118,10 @@
 		9A14352C2529DAD7005F59D1 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				9A14352D2529DB0A005F59D1 /* APIData.swift */,
-				81D5EF972534653D002E1509 /* PairAPIData.swift */,
 				81D5EF9B253465C1002E1509 /* JSONDecoders */,
 				9A14352F2529DB2C005F59D1 /* APIManager.swift */,
 				9AEFEF08252CC944003562C6 /* DataModel.swift */,
+				81D5EFAA253475CE002E1509 /* WallpaperData.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			children = (
 				9AE38B93252B0CB600BD8B98 /* DetailVC.swift */,
 				9A716A3E252B287F00E103C5 /* MainViewController.swift */,
+				81D5EF9F25346ECC002E1509 /* PreviewVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -283,12 +289,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A14352E2529DB0A005F59D1 /* APIData.swift in Sources */,
+				81D5EFA025346ECC002E1509 /* PreviewVC.swift in Sources */,
 				9A716A4D252C7E7700E103C5 /* HeaderCollectionReusableView.swift in Sources */,
 				9A716A41252B292600E103C5 /* CollectionViewCell.swift in Sources */,
 				9A1435302529DB2C005F59D1 /* APIManager.swift in Sources */,
 				9A1435192529DA15005F59D1 /* AppDelegate.swift in Sources */,
 				9A14351B2529DA15005F59D1 /* SceneDelegate.swift in Sources */,
 				9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */,
+				81D5EFAB253475CE002E1509 /* WallpaperData.swift in Sources */,
 				9A716A3F252B287F00E103C5 /* MainViewController.swift in Sources */,
 				9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */,
 				81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */,

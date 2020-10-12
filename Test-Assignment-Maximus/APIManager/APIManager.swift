@@ -21,6 +21,7 @@ class APIManager {
     var imageObjectsArray: [DataModel] = []
     var imagesArray: [UIImage] = []
     var nextPage: String?
+    var wallpaperObject: WallpaperData?
     
     var delegate: APIManangerDelegate?
     
@@ -78,6 +79,17 @@ class APIManager {
                 let decoder = JSONDecoder()
                 do {
                     let decodedData = try decoder.decode(PairAPIData.self, from: data)
+                    
+                    let id = decodedData.id
+                    let image1 = decodedData.image_1
+                    let image2 = decodedData.image_2
+                    let image3 = decodedData.image_3
+                    let closed = decodedData.closed
+                    let copyright = decodedData.copyright
+                    
+                    self.wallpaperObject = WallpaperData(id: id, image_1: image1, image_2: image2, image_3: image3, closed: closed, copyright: copyright)
+                    
+                    
                     print(decodedData.id)
                 } catch {
                     
