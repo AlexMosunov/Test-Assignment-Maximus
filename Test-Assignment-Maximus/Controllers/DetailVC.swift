@@ -10,6 +10,11 @@ import UIKit
 import AppstoreTransition
 import Kingfisher
 
+
+protocol Details {
+    func passCellIndex(index: IndexPath)
+}
+
 class DetailVC: UIViewController {
 
 
@@ -19,16 +24,24 @@ class DetailVC: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var watchButton: UIButton!
+    @IBOutlet weak var scrollViewNew: UIScrollView!
+    @IBOutlet weak var authorLabel: UILabel!
+    
     
     var apiManager: APIManager?
     var index: IndexPath?
     
     var picture: UIImage?
+    var detailsDelegate: Details?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.clipsToBounds = true
         contentScrollView.delegate = self
+//        scrollViewNew.isScrollEnabled = false
+        
+        let scrollSize = CGSize(width: view.frame.width, height: view.frame.height)
+        scrollView.contentSize = scrollSize
         
         scrollView.contentInsetAdjustmentBehavior = .never
         
@@ -38,8 +51,27 @@ class DetailVC: UIViewController {
    
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        authorLabel.alpha = 0.0
+        UIView.animate(withDuration: 0.7) {
+            self.authorLabel.alpha = 1.0
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        cancelButton.alpha = 0.0
+        authorLabel.alpha = 0.0
+        
+        if let index = index {
+            detailsDelegate?.passCellIndex(index: index)
+        }
+    }
+    
     
     func setUI() {
+        print("UI")
         watchButton.layer.cornerRadius = watchButton.frame.height / 2
         cancelButton.layer.cornerRadius = 50
         let blur = UIVisualEffectView(effect: UIBlurEffect(style:
@@ -50,15 +82,27 @@ class DetailVC: UIViewController {
         blur.layer.masksToBounds = true
         cancelButton.insertSubview(blur, at: 0)
         cancelButton.bringSubviewToFront(cancelButton.imageView!)
+        cancelButton.alpha = 1.0
         imageView.layer.cornerRadius = 10
+        
+        
+        
         
     }
     
     
     
+    @IBAction func watchButtonTapped(_ sender: UIButton) {
+        print("")
+    }
     
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        
+        
+        UIView.animate(withDuration: 0.4) {
+            self.cancelButton.alpha = 0.0
+        }
         self.dismiss(animated: true)
     }
     
@@ -74,6 +118,15 @@ extension DetailVC: UIScrollViewDelegate {
         scrollView.bounces = scrollView.contentOffset.y > 100
         dismissHandler.scrollViewDidScroll(scrollView)
         
+        // hide cancel button onscroll
+        if scrollView.contentOffset.y > 5 {
+            let percent = scrollView.contentOffset.y / 100
+            cancelButton.alpha = 1.0 - percent
+        }
+        
+        
+        print(scrollView.contentOffset.y)
+        
     }
     
 
@@ -83,6 +136,9 @@ extension DetailVC: UIScrollViewDelegate {
 
 extension DetailVC: CardDetailViewController {
     var scrollView: UIScrollView {
+        let scrollSize = CGSize(width: view.frame.width, height: view.frame.height)
+        contentScrollView.contentSize = scrollSize
+//        contentScrollView.isScrollEnabled = false
         return contentScrollView
     }
     

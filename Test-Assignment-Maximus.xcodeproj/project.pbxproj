@@ -21,6 +21,7 @@
 		9A716A4D252C7E7700E103C5 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */; };
 		9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE38B93252B0CB600BD8B98 /* DetailVC.swift */; };
 		9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEFEF08252CC944003562C6 /* DataModel.swift */; };
+		9AF4DB3B25338E440007F7D4 /* CollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF4DB3A25338E440007F7D4 /* CollectionFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		9AE38B93252B0CB600BD8B98 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		9AEFEF08252CC944003562C6 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		9AF4DB3A25338E440007F7D4 /* CollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFlowLayout.swift; sourceTree = "<group>"; };
 		C54585B1DA0FB3497F33C252 /* Pods-Test-Assignment-Maximus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-Assignment-Maximus.debug.xcconfig"; path = "Target Support Files/Pods-Test-Assignment-Maximus/Pods-Test-Assignment-Maximus.debug.xcconfig"; sourceTree = "<group>"; };
 		DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test_Assignment_Maximus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF86513A356A2CB08EED4ABD /* Pods-Test-Assignment-Maximus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-Assignment-Maximus.release.xcconfig"; path = "Target Support Files/Pods-Test-Assignment-Maximus/Pods-Test-Assignment-Maximus.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,10 +92,8 @@
 				9A14351A2529DA15005F59D1 /* SceneDelegate.swift */,
 				9A14352C2529DAD7005F59D1 /* APIManager */,
 				9A1435312529DDD2005F59D1 /* Controllers */,
-				9A1435322529E0A1005F59D1 /* Cells */,
-				9A14351E2529DA15005F59D1 /* Main.storyboard */,
+				9AF4DB3925334AC70007F7D4 /* Views */,
 				9A1435212529DA19005F59D1 /* Assets.xcassets */,
-				9A1435232529DA19005F59D1 /* LaunchScreen.storyboard */,
 				9A1435262529DA19005F59D1 /* Info.plist */,
 				9A14353B252A1C5E005F59D1 /* gradient_60.mp4 */,
 			);
@@ -122,7 +122,6 @@
 		9A1435322529E0A1005F59D1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9A716A4B252C7E4700E103C5 /* Header */,
 				9A716A40252B292600E103C5 /* CollectionViewCell.swift */,
 			);
 			path = Cells;
@@ -134,6 +133,18 @@
 				9A716A4C252C7E7700E103C5 /* HeaderCollectionReusableView.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		9AF4DB3925334AC70007F7D4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A1435232529DA19005F59D1 /* LaunchScreen.storyboard */,
+				9A14351E2529DA15005F59D1 /* Main.storyboard */,
+				9A1435322529E0A1005F59D1 /* Cells */,
+				9A716A4B252C7E4700E103C5 /* Header */,
+				9AF4DB3A25338E440007F7D4 /* CollectionFlowLayout.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B1DF968F1CA37D20FFC1C21C /* Frameworks */ = {
@@ -269,6 +280,7 @@
 				9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */,
 				9A716A3F252B287F00E103C5 /* MainViewController.swift in Sources */,
 				9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */,
+				9AF4DB3B25338E440007F7D4 /* CollectionFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -124,6 +124,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="trf-TM-k2p">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yB3-tF-qJC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -165,19 +170,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2O2-LW-LuX">
-                                        <rect key="frame" x="0.0" y="405" width="414" height="495"/>
+                                        <rect key="frame" x="0.0" y="405" width="414" height="494"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Серый текст в левом нижнем углу экрана" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcS-42-vBt">
-                                                <rect key="frame" x="16" y="413" width="335.5" height="20"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnE-Le-lK9">
                                                 <rect key="frame" x="140" y="40" width="134" height="44"/>
                                                 <color key="backgroundColor" red="0.14901960784313725" green="0.33725490196078434" blue="0.99607843137254903" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="134" id="1cm-am-udv"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="1cm-am-udv"/>
                                                     <constraint firstAttribute="height" constant="44" id="PlI-y5-5Ea"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -190,10 +189,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="PnE-Le-lK9" firstAttribute="top" secondItem="2O2-LW-LuX" secondAttribute="top" constant="40" id="1NG-nc-QPe"/>
-                                            <constraint firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="62" id="Rz7-GS-fhd"/>
                                             <constraint firstItem="PnE-Le-lK9" firstAttribute="centerX" secondItem="2O2-LW-LuX" secondAttribute="centerX" id="gKc-nZ-1j8"/>
-                                            <constraint firstItem="GcS-42-vBt" firstAttribute="leading" secondItem="2O2-LW-LuX" secondAttribute="leading" constant="16" id="hdC-QO-AJZ"/>
-                                            <constraint firstAttribute="height" constant="495" id="o9M-95-YiJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -211,12 +207,22 @@
                                     <constraint firstItem="BzJ-Gj-kdc" firstAttribute="centerX" secondItem="yB3-tF-qJC" secondAttribute="centerX" id="xUx-bD-ynn"/>
                                 </constraints>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Серый текст в левом нижнем углу экрана" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcS-42-vBt">
+                                <rect key="frame" x="15" y="792" width="335.5" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="GcS-42-vBt" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" constant="15" id="1qP-d0-G3H"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="8Pk-f2-e8R"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="Eg3-nV-ZIP"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="trailing" secondItem="vIX-vV-F1F" secondAttribute="trailing" id="Kwn-DX-g98"/>
+                            <constraint firstItem="vIX-vV-F1F" firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="50" id="OQY-XH-5Eg"/>
+                            <constraint firstItem="2O2-LW-LuX" firstAttribute="height" secondItem="Yoc-ER-Uzc" secondAttribute="height" multiplier="0.551339" id="ORW-3l-4Dx"/>
+                            <constraint firstAttribute="bottom" secondItem="yB3-tF-qJC" secondAttribute="bottom" id="ROc-3I-1hw"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="top" secondItem="Yoc-ER-Uzc" secondAttribute="top" id="Vd9-2m-IOD"/>
                             <constraint firstAttribute="bottom" secondItem="yB3-tF-qJC" secondAttribute="bottom" id="mCu-Fm-rAJ"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="trailing" secondItem="vIX-vV-F1F" secondAttribute="trailing" id="q8c-Bx-kIN"/>
@@ -225,6 +231,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="pP0-XZ-oil"/>
                     <connections>
+                        <outlet property="authorLabel" destination="GcS-42-vBt" id="bIl-l1-yqC"/>
                         <outlet property="cancelButton" destination="jXD-rF-atL" id="Tpf-uG-s00"/>
                         <outlet property="contentScrollView" destination="yB3-tF-qJC" id="GtZ-iy-sKr"/>
                         <outlet property="headerView" destination="BzJ-Gj-kdc" id="SJW-9e-jtL"/>

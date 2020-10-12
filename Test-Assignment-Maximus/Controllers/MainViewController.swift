@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     
     let sectionInsets = UIEdgeInsets(top: 9.0, left: 11.0, bottom: 9.0, right: 11.0)
     let itemsPerRow: CGFloat = 1
+    var indexOfCell: IndexPath?
     
     
     override func viewDidLoad() {
@@ -36,8 +37,41 @@ class MainViewController: UIViewController {
         
         apiManager.postRequest()
         
+        
+        // Set CollectionView Flow Layout for Header and Items
+        let flowLayout = CollectionFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        flowLayout.minimumLineSpacing = 1.0
+        flowLayout.minimumInteritemSpacing = 1.0
+        collectionView.collectionViewLayout = flowLayout
+        
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+ 
+        // animate cell's content
+        if let indexPath = indexOfCell, let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
+            cell.newItemLabel.alpha = 0.0
+            cell.openButton.alpha = 0.0
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutSubviews()
+                cell.newItemLabel.alpha = 1.0
+                cell.openButton.alpha = 1.0
+            }
+        }
+
+        
+        
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     //MARK: - func to implement animated transition
     
     private func showType2(indexPath: IndexPath, bottomDismiss: Bool = false) {
@@ -62,6 +96,7 @@ class MainViewController: UIViewController {
         
         viewController.apiManager = apiManager
         viewController.index = indexPath
+        viewController.detailsDelegate = self
         
         // pass image
         
@@ -111,10 +146,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.collectionCellDelegate = self
         cell.index = indexPath
         
+        
         return cell
     }
     
-    
+ 
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath) as! HeaderCollectionReusableView
@@ -130,6 +166,31 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showType2(indexPath: indexPath)
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        print("willDisplay")
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+//        print("didEndDisplayingSupplementaryView")
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        print("didDeselectItemAt")
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+//
+//        UIView.animate(withDuration: 1.4) {
+//            cell.newItemLabel.alpha = 1.0
+//            cell.openButton.alpha = 1.0
+//        }
+//    }
+//
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offseetY = scrollView.contentOffset.y
@@ -145,6 +206,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
     }
+
     
     // infinite scroll
     
@@ -208,6 +270,15 @@ extension MainViewController: CollectionViewNew {
         
         showType2(indexPath: index)
         
+    }
+    
+    
+}
+
+extension MainViewController: Details {
+    func passCellIndex(index: IndexPath) {
+        print("INDEX - \(index)")
+        indexOfCell = index
     }
     
     

@@ -46,12 +46,20 @@ class CollectionViewCell: UICollectionViewCell {
         blur.layer.masksToBounds = true
         openButton.insertSubview(blur, at: 0)
         
+        newItemLabel.alpha = 0.0
+        openButton.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.newItemLabel.alpha = 1.0
+            self.openButton.alpha = 1.0
+        }
         
     }
     
-    
-    
+  
+
     @IBAction func openButtonTapped(_ sender: UIButton) {
+//        newItemLabel.alpha = 0.0
+//        openButton.alpha = 0.0
         if let index = index {
             collectionCellDelegate?.onClickCellButton(index: index)
         }
