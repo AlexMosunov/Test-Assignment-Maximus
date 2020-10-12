@@ -174,21 +174,22 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnE-Le-lK9">
                                                         <rect key="frame" x="0.0" y="0.0" width="134" height="44"/>
-                                                        <color key="backgroundColor" red="0.14901960784313725" green="0.33725490196078434" blue="0.99607843137254903" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="1cm-am-udv"/>
                                                             <constraint firstAttribute="height" constant="44" id="PlI-y5-5Ea"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title=" Смотреть" image="eye" catalog="system">
+                                                        <inset key="imageEdgeInsets" minX="32" minY="16" maxX="84" maxY="15"/>
+                                                        <state key="normal" title=" Preview" image="eye1">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="watchButtonTapped:" destination="VUU-os-exo" eventType="touchUpInside" id="iHo-xM-mlB"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEp-0t-J3H">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEp-0t-J3H">
                                                         <rect key="frame" x="151" y="0.0" width="134" height="44"/>
                                                         <color key="backgroundColor" red="0.14901960780000001" green="0.33725490200000002" blue="0.99607843139999996" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -197,7 +198,8 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title=" Смотреть" image="eye" catalog="system">
+                                                        <inset key="imageEdgeInsets" minX="28" minY="15" maxX="92" maxY="15"/>
+                                                        <state key="normal" title=" Download" image="download1">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                     </button>
@@ -234,7 +236,13 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-gY-7Ku">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6SB-8M-ZX1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wTk-ts-mvG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Na2-i0-U1Z">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="trf-TM-k2p">
@@ -248,20 +256,28 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GcS-42-vBt" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" constant="15" id="1qP-d0-G3H"/>
+                            <constraint firstAttribute="bottom" secondItem="6SB-8M-ZX1" secondAttribute="bottom" id="6lj-Wh-96Y"/>
+                            <constraint firstItem="6SB-8M-ZX1" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="6vD-7u-suF"/>
                             <constraint firstAttribute="bottom" secondItem="jIg-gY-7Ku" secondAttribute="bottom" id="7ZN-gn-fFL"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="8Pk-f2-e8R"/>
                             <constraint firstItem="wTk-ts-mvG" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="B62-qt-VPp"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="Eg3-nV-ZIP"/>
+                            <constraint firstItem="vIX-vV-F1F" firstAttribute="trailing" secondItem="Na2-i0-U1Z" secondAttribute="trailing" id="FmI-w1-AcD"/>
+                            <constraint firstAttribute="bottom" secondItem="Na2-i0-U1Z" secondAttribute="bottom" id="GRj-Zn-oGH"/>
+                            <constraint firstItem="vIX-vV-F1F" firstAttribute="trailing" secondItem="6SB-8M-ZX1" secondAttribute="trailing" id="GkM-Qo-nHi"/>
                             <constraint firstItem="vIX-vV-F1F" firstAttribute="trailing" secondItem="wTk-ts-mvG" secondAttribute="trailing" id="GtN-zY-J0D"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="trailing" secondItem="vIX-vV-F1F" secondAttribute="trailing" id="Kwn-DX-g98"/>
                             <constraint firstItem="vIX-vV-F1F" firstAttribute="trailing" secondItem="jIg-gY-7Ku" secondAttribute="trailing" id="N0j-1C-bUO"/>
                             <constraint firstItem="vIX-vV-F1F" firstAttribute="bottom" secondItem="GcS-42-vBt" secondAttribute="bottom" constant="50" id="OQY-XH-5Eg"/>
                             <constraint firstItem="2O2-LW-LuX" firstAttribute="height" secondItem="Yoc-ER-Uzc" secondAttribute="height" multiplier="0.551339" id="ORW-3l-4Dx"/>
                             <constraint firstAttribute="bottom" secondItem="yB3-tF-qJC" secondAttribute="bottom" id="ROc-3I-1hw"/>
+                            <constraint firstItem="Na2-i0-U1Z" firstAttribute="top" secondItem="Yoc-ER-Uzc" secondAttribute="top" id="T1e-oV-cEt"/>
                             <constraint firstItem="wTk-ts-mvG" firstAttribute="top" secondItem="Yoc-ER-Uzc" secondAttribute="top" id="VHU-e8-7MS"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="top" secondItem="Yoc-ER-Uzc" secondAttribute="top" id="Vd9-2m-IOD"/>
+                            <constraint firstItem="6SB-8M-ZX1" firstAttribute="top" secondItem="Yoc-ER-Uzc" secondAttribute="top" id="WPX-ST-CE9"/>
                             <constraint firstItem="jIg-gY-7Ku" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="dDA-2H-Oaw"/>
                             <constraint firstAttribute="bottom" secondItem="yB3-tF-qJC" secondAttribute="bottom" id="mCu-Fm-rAJ"/>
+                            <constraint firstItem="Na2-i0-U1Z" firstAttribute="leading" secondItem="vIX-vV-F1F" secondAttribute="leading" id="mWr-ld-BJy"/>
                             <constraint firstAttribute="bottom" secondItem="wTk-ts-mvG" secondAttribute="bottom" id="pGz-Bs-Skm"/>
                             <constraint firstItem="yB3-tF-qJC" firstAttribute="trailing" secondItem="vIX-vV-F1F" secondAttribute="trailing" id="q8c-Bx-kIN"/>
                             <constraint firstItem="jIg-gY-7Ku" firstAttribute="top" secondItem="Yoc-ER-Uzc" secondAttribute="top" id="yj5-7X-vwz"/>
@@ -272,13 +288,16 @@
                         <outlet property="authorLabel" destination="GcS-42-vBt" id="bIl-l1-yqC"/>
                         <outlet property="cancelButton" destination="jXD-rF-atL" id="Tpf-uG-s00"/>
                         <outlet property="contentScrollView" destination="yB3-tF-qJC" id="GtZ-iy-sKr"/>
+                        <outlet property="downloadButton" destination="tEp-0t-J3H" id="58c-O6-O82"/>
                         <outlet property="gestureView" destination="trf-TM-k2p" id="Sb7-oH-XNi"/>
                         <outlet property="headerView" destination="BzJ-Gj-kdc" id="SJW-9e-jtL"/>
                         <outlet property="heightConstraint" destination="ABG-Pr-vlv" id="IK5-2g-AHG"/>
                         <outlet property="imageView" destination="BX6-be-HBO" id="7ck-Pt-fDe"/>
+                        <outlet property="presetImageOne" destination="Na2-i0-U1Z" id="Mle-an-8oP"/>
+                        <outlet property="presetImageTwo" destination="6SB-8M-ZX1" id="hgk-ml-eSJ"/>
                         <outlet property="wallpaperImageOne" destination="wTk-ts-mvG" id="ceO-GD-7xF"/>
                         <outlet property="wallpaperImageTwo" destination="jIg-gY-7Ku" id="Pvq-u3-RCn"/>
-                        <outlet property="watchButton" destination="PnE-Le-lK9" id="iEH-P3-j7o"/>
+                        <outlet property="watchButton" destination="PnE-Le-lK9" id="uOP-lC-sqn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3vc-XG-tP1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -334,7 +353,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="eye" catalog="system" width="128" height="81"/>
+        <image name="download1" width="47" height="47"/>
+        <image name="eye1" width="47" height="36"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
