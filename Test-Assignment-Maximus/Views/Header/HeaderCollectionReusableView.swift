@@ -28,7 +28,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         super.init(coder: aDecoder)
     }
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.text = "Тестовое заданиe для iOS разарботчика"
         label.textColor = .white

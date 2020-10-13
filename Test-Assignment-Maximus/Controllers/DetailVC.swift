@@ -36,6 +36,7 @@ class DetailVC: UIViewController {
     
     var apiManager: APIManager?
     var index: IndexPath?
+    var mainVC: MainViewController?
     
     var picture: UIImage?
     var detailsDelegate: Details?
@@ -43,9 +44,12 @@ class DetailVC: UIViewController {
     var wallpaperObject: DataModel?
     
     var numberOfTaps = 0
-    var previewImageIsBeingShown = false
+    
     
     var spinnerView: UIView?
+    var statusBarManager: UIStatusBarManager?
+    var openedImage = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +66,13 @@ class DetailVC: UIViewController {
 
         setUI()
         
-   
+        // adding gesture recognizer to the header view
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnHeaderView(sender:)))
+        headerView.addGestureRecognizer(tapGesture)
+        
+        modalPresentationCapturesStatusBarAppearance = true
+        setNeedsStatusBarAppearanceUpdate()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,12 +82,11 @@ class DetailVC: UIViewController {
         wallpaperImageTwo.alpha = 0
         presetImageOne.alpha = 0
         presetImageTwo.alpha = 0
-
         authorLabel.alpha = 0.0
         UIView.animate(withDuration: 0.7) {
             self.authorLabel.alpha = 1.0
         }
-        
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,10 +97,32 @@ class DetailVC: UIViewController {
         if let index = index {
             detailsDelegate?.passCellIndex(index: index)
         }
+        
     }
     
     
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    
+    override var prefersStatusBarHidden: Bool {
+        if openedImage {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    
     func setUI() {
+        
+        watchButton.setTitle(apiManager?.localizationObject?.input_8 ?? "Preview", for: .normal)
+        downloadButton.setTitle(apiManager?.localizationObject?.input_9 ?? "Download", for: .normal)
+        authorLabel.text = apiManager?.wallpaperObject?.copyright ?? ""
+        
+        
         watchButton.layer.cornerRadius = watchButton.frame.height / 2
         downloadButton.layer.cornerRadius = downloadButton.frame.height / 2
         cancelButton.layer.cornerRadius = 50
@@ -111,44 +142,43 @@ class DetailVC: UIViewController {
     
     func setPreviewImages() {
         if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {
-            print("wallpaperObject.image_1 - \(wallpaperObject.image_1)")
-            guard let urlOne = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)") else {return}
 
+            openedImage = true
+            setNeedsStatusBarAppearanceUpdate()
+            
+            // setting first preview image with preset image
+            guard let urlOne = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)") else {return}
             wallpaperImageOne.kf.indicatorType = .activity
             wallpaperImageOne.kf.setImage(with: urlOne, completionHandler:  { result in
-                print(result)
                 self.presetImageOne.image = UIImage(named: "preset1")
             })
             
-            
+            // setting second preview image with preset image
             guard let urlTwo = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_2)") else {return}
-            
             wallpaperImageTwo.kf.setImage(with: urlTwo, completionHandler:  { result in
-                
                 self.presetImageTwo.contentMode = .top
                 self.presetImageTwo.clipsToBounds = true
                 let image = UIImage(named: "preset2")
-                
                 self.presetImageTwo.image = image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
-
             })
-
+            
+            // adding gesture recognizer to the gesture view
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImage(sender:)))
             gestureView.addGestureRecognizer(tapGesture)
+            
+            
+            gestureView.alpha = 1.0
+            wallpaperImageOne.alpha = 1.0
+            wallpaperImageTwo.alpha = 1.0
+            presetImageOne.alpha = 1.0
+            presetImageTwo.alpha = 1.0
+            dismissEnabled = false
         }
     }
     
     
     @IBAction func watchButtonTapped(_ sender: UIButton) {
-        previewImageIsBeingShown = true
         setPreviewImages()
-        gestureView.alpha = 1.0
-        wallpaperImageOne.alpha = 1.0
-        wallpaperImageTwo.alpha = 1.0
-        presetImageOne.alpha = 1.0
-        presetImageTwo.alpha = 1.0
-        
-
     }
     
     
@@ -161,6 +191,9 @@ class DetailVC: UIViewController {
     }
     
 
+    @objc func handleTapOnHeaderView(sender: UITapGestureRecognizer) {
+        setPreviewImages()
+    }
     
     
     @objc func handleTapOnImage(sender: UITapGestureRecognizer) {
@@ -169,24 +202,23 @@ class DetailVC: UIViewController {
         
         switch numberOfTaps {
         case 1:
-            print(111)
             UIView.animate(withDuration: 0.2) {
                 self.wallpaperImageOne.alpha = 0.0
                 self.presetImageOne.alpha = 0.0
             }
         case 2:
-            print(222)
             UIView.animate(withDuration: 0.2) {
                 self.wallpaperImageTwo.alpha = 0.0
                 self.presetImageTwo.alpha = 0.0
             }
             numberOfTaps = 0
             gestureView.alpha = 0.0
+            dismissEnabled = true
+            openedImage = false
+            setNeedsStatusBarAppearanceUpdate()
         default:
-            previewImageIsBeingShown = false
             wallpaperImageOne.image = UIImage()
             wallpaperImageTwo.image = UIImage()
-            print("error with preview images")
         }
 
     }
@@ -208,23 +240,18 @@ extension DetailVC: UIScrollViewDelegate {
             cancelButton.alpha = 1.0 - percent
         }
         
-        print(previewImageIsBeingShown)
-        if previewImageIsBeingShown {
-            contentScrollView.isScrollEnabled = false
-        }
                 
     }
     
-
-    
 }
+
+
 
 
 extension DetailVC: CardDetailViewController {
     var scrollView: UIScrollView {
         let scrollSize = CGSize(width: view.frame.width, height: view.frame.height)
         contentScrollView.contentSize = scrollSize
-//        contentScrollView.isScrollEnabled = false
         return contentScrollView
     }
     
@@ -233,6 +260,8 @@ extension DetailVC: CardDetailViewController {
     var cardContentView: UIView {
         return headerView
     }
+    
+    
 
 }
 

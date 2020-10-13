@@ -20,13 +20,20 @@ class MainViewController: UIViewController {
     private var transition: CardTransition?
     var fetchingMore = false
     
+    
     let sectionInsets = UIEdgeInsets(top: 9.0, left: 11.0, bottom: 9.0, right: 11.0)
     let itemsPerRow: CGFloat = 1
     var indexOfCell: IndexPath?
     
+    var openedChildVC = false
     
+    var headerLabelText = ""
+    var btnLabel = ""
+    var newItemLbl = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        apiManager.localizationDelegate = self
         apiManager.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -35,8 +42,9 @@ class MainViewController: UIViewController {
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: HeaderCollectionReusableView.identifier)
         
+        print("String(NSLocale.preferredLanguages[0]) -     \(getLocalizationLanguageCode())")
+        apiManager.postRequest(language: getLocalizationLanguageCode())
         apiManager.postRequest()
-        
         
         // Set CollectionView Flow Layout for Header and Items
 //        let flowLayout = CollectionFlowLayout()
@@ -48,10 +56,16 @@ class MainViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
- 
+        
         // animate cell's content
         if let indexPath = indexOfCell, let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
             cell.newItemLabel.alpha = 0.0
@@ -62,15 +76,38 @@ class MainViewController: UIViewController {
                 cell.openButton.alpha = 1.0
             }
         }
-
         
+        openedChildVC = false
+        setNeedsStatusBarAppearanceUpdate()
         
+    
     }
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        if openedChildVC {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
+    
+    func getLocalizationLanguageCode() -> String {
+        if NSLocale.preferredLanguages[0].range(of: "en") != nil {
+            return "en"
+        } else if NSLocale.preferredLanguages[0].range(of: "ru") != nil {
+            return "ru"
+        } else {
+            return "en"
+        }
+    }
+    
 
     //MARK: - func to implement animated transition
     
@@ -79,7 +116,6 @@ class MainViewController: UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
         
         // pass image
-
         
         // Get tapped cell location
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
@@ -99,7 +135,6 @@ class MainViewController: UIViewController {
         viewController.detailsDelegate = self
         
         
-        
         let imageObject = apiManager.imageObjectsArray[indexPath.row]
         apiManager.postRequest(id: imageObject.id)
         
@@ -109,6 +144,9 @@ class MainViewController: UIViewController {
 
         presentExpansion(viewController, cell: cell, animated: true)
         viewController.imageView.kf.setImage(with: url)
+        
+        openedChildVC = true
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     
@@ -118,8 +156,10 @@ class MainViewController: UIViewController {
 //MARK: - APIManangerDelegate
 
 extension MainViewController: APIManangerDelegate {
+    
+    
     func didUpdateData(_ DataManager: APIManager, data: [DataModel]) {
-        
+        print("???????????????????")
         self.apiManager.imageObjectsArray += data
         
         DispatchQueue.main.async {
@@ -130,11 +170,28 @@ extension MainViewController: APIManangerDelegate {
 
 
 
+extension MainViewController: APILocalizationDelegate {
+    
+    func didUpdateLocalizationData(_ DataManager: APIManager, data: LocalizationData) {
+
+//        headerLabelText = data.input_5 ?? "Collection of paired wallpapers"
+//        btnLabel = data.input_7 ?? "Open"
+//        newItemLbl = data.input_6 ?? "New"
+        DispatchQueue.main.async {
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.reloadData()
+        }
+        
+    }
+    
+}
+
+
+
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        return viewModel.numberOfRowsInSection(section: section)
         return apiManager.imageObjectsArray.count
     }
     
@@ -143,10 +200,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
-        
         let imageURLString = apiManager.imageObjectsArray[indexPath.row]
-        cell.updateUI(image: imageURLString.url)
-        
+//        cell.updateUI(image: imageURLString.url, btnLabel: btnLabel, newItemLbl: newItemLbl)
+        cell.updateUI(image: imageURLString.url, btnLabel: apiManager.localizationObject?.input_7, newItemLbl: apiManager.localizationObject?.input_6)
         cell.collectionCellDelegate = self
         cell.index = indexPath
         
@@ -158,8 +214,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionReusableView.identifier, for: indexPath) as! HeaderCollectionReusableView
-        
 //        header.imageView.image = UIImage(named: "pic1")
+
+        header.label.text = apiManager.localizationObject?.input_5
         header.configure()
         
         return header
@@ -184,18 +241,14 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let contentHight = scrollView.contentSize.height
         
         if offseetY > contentHight - scrollView.frame.height && offseetY > 200 {
-
             if !fetchingMore {
-
                 beginBatchFetch()
             }
-            
         }
-        
     }
 
     
-    // infinite scroll
+    // loading data on scroll
     
     func beginBatchFetch() {
         fetchingMore = true
@@ -218,8 +271,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - UICollectionViewDelegateFlowLayout
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
-    
-    
     
     
     func collectionView(_ collectionView: UICollectionView,
@@ -266,8 +317,10 @@ extension MainViewController: CollectionViewNew {
 }
 
 extension MainViewController: Details {
+    
     func passCellIndex(index: IndexPath) {
         indexOfCell = index
+        
     }
     
     

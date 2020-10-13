@@ -100,6 +100,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a18-Q9-xuD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="U0a-I9-MIj">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1LF-1b-GFO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -108,6 +116,10 @@
                             <constraint firstItem="PQc-F9-YQ1" firstAttribute="leading" secondItem="1LF-1b-GFO" secondAttribute="leading" id="78W-Q8-JHz"/>
                             <constraint firstAttribute="bottom" secondItem="PQc-F9-YQ1" secondAttribute="bottom" id="EEr-9A-cLd"/>
                             <constraint firstItem="PQc-F9-YQ1" firstAttribute="top" secondItem="Q13-jg-ocg" secondAttribute="top" constant="-45" id="ESc-2F-zjD"/>
+                            <constraint firstItem="a18-Q9-xuD" firstAttribute="top" secondItem="Q13-jg-ocg" secondAttribute="top" id="ROH-ny-qsC"/>
+                            <constraint firstItem="a18-Q9-xuD" firstAttribute="height" secondItem="Q13-jg-ocg" secondAttribute="height" multiplier="0.0401786" id="RfB-na-z6E"/>
+                            <constraint firstItem="1LF-1b-GFO" firstAttribute="trailing" secondItem="a18-Q9-xuD" secondAttribute="trailing" id="bZ9-eT-1RA"/>
+                            <constraint firstItem="a18-Q9-xuD" firstAttribute="leading" secondItem="1LF-1b-GFO" secondAttribute="leading" id="eQD-p1-EvG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -181,7 +193,7 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="32" minY="16" maxX="84" maxY="15"/>
+                                                        <inset key="imageEdgeInsets" minX="26" minY="16" maxX="89" maxY="15"/>
                                                         <state key="normal" title=" Preview" image="eye1">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>

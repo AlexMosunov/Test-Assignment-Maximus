@@ -61,10 +61,14 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateUI(image: String?) {
+    func updateUI(image: String?, btnLabel: String?, newItemLbl: String?) {
         setLabelsUI()
         containerView.layer.cornerRadius = 15
         containerView.clipsToBounds = true
+        
+        openButton.setTitle(btnLabel ?? "Open", for: .normal)
+        newItemLabel.text = newItemLbl ?? "New"
+        
         guard let imageString = image else { return }
         
         guard let imageStringURL = URL(string: imageString) else { return }
