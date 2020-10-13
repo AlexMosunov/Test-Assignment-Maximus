@@ -30,7 +30,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     
     let label: UILabel = {
         let label = UILabel()
-        label.text = "Тестовое заданиe для iOS разарботчика"
+        label.text = ""
         label.textColor = .white
 //        label.font = UIFont(name: "Helvetica Neue", size: 35)
         label.font = UIFont.boldSystemFont(ofSize: 33)

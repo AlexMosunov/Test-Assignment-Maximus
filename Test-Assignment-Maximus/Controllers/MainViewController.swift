@@ -84,6 +84,18 @@ class MainViewController: UIViewController {
     }
     
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if Core.shared.isNewUSer() {
+            // show onboarding
+//            let vc = storyboard?.instantiateViewController(identifier: "WelcomeVC") as! WelcomeVC
+//            vc.modalPresentationStyle = .fullScreen
+//            vc.apiManager = apiManager
+//            present(vc, animated: true)
+        }
+    }
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -331,6 +343,20 @@ extension MainViewController: Details {
 extension MainViewController: CardsViewController {
 
     
+}
+
+
+
+class Core {
     
+    static let shared = Core()
+    
+    func isNewUSer() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "isNewUser")
+    }
+    
+    func setIsNotNewUser() {
+        UserDefaults.standard.set(true, forKey: "isNewUser")
+    }
     
 }

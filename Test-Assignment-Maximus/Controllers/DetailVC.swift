@@ -45,6 +45,9 @@ class DetailVC: UIViewController {
     
     var numberOfTaps = 0
     
+    var imageOne: UIImage?
+    var imageTwo: UIImage?
+    
     
     var spinnerView: UIView?
     var statusBarManager: UIStatusBarManager?
@@ -75,6 +78,7 @@ class DetailVC: UIViewController {
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gestureView.alpha = 0
@@ -86,6 +90,7 @@ class DetailVC: UIViewController {
         UIView.animate(withDuration: 0.7) {
             self.authorLabel.alpha = 1.0
         }
+        
 
     }
     
@@ -152,7 +157,7 @@ class DetailVC: UIViewController {
             wallpaperImageOne.kf.setImage(with: urlOne, completionHandler:  { result in
                 self.presetImageOne.image = UIImage(named: "preset1")
             })
-            
+
             // setting second preview image with preset image
             guard let urlTwo = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_2)") else {return}
             wallpaperImageTwo.kf.setImage(with: urlTwo, completionHandler:  { result in
@@ -177,8 +182,46 @@ class DetailVC: UIViewController {
     }
     
     
+    func downloadImage(with urlString : String , imageCompletionHandler: @escaping (UIImage?) -> Void){
+      guard let url = URL.init(string: urlString) else {
+          return  imageCompletionHandler(nil)
+      }
+      let resource = ImageResource(downloadURL: url)
+      
+      KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
+        switch result {
+        case .success(let value):
+            print("image downloaded")
+            imageCompletionHandler(value.image)
+        case .failure:
+            print("image failed to download")
+            imageCompletionHandler(nil)
+        }
+      }
+    }
+    
+    
     @IBAction func watchButtonTapped(_ sender: UIButton) {
         setPreviewImages()
+    }
+    
+    
+    @IBAction func downloadButtonTapped(_ sender: UIButton) {
+        if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {
+            
+            downloadImage(with :"https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)"){image in
+                guard let image  = image else { return}
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                // do what you need with the returned image.
+            }
+            
+            downloadImage(with :"https://pair.maximusapps.top/storage/\(wallpaperObject.image_2)"){image in
+                guard let image  = image else { return}
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                // do what you need with the returned image.
+            }
+        }
+        
     }
     
     
@@ -188,6 +231,19 @@ class DetailVC: UIViewController {
             self.cancelButton.alpha = 0.0
         }
         self.dismiss(animated: true)
+    }
+    
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
     }
     
 
@@ -222,6 +278,8 @@ class DetailVC: UIViewController {
         }
 
     }
+    
+    
     
 
 }

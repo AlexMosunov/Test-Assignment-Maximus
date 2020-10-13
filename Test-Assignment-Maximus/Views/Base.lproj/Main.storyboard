@@ -10,6 +10,36 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--WelcomeVC-->
+        <scene sceneID="aZB-Ar-S96">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeVC" id="fQ2-bg-c7E" customClass="WelcomeVC" customModule="Test_Assignment_Maximus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5qN-f4-wNu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIc-ca-90M">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Usl-Gh-d5k"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Usl-Gh-d5k" firstAttribute="bottom" secondItem="CIc-ca-90M" secondAttribute="bottom" id="PUV-Xe-DsE"/>
+                            <constraint firstItem="CIc-ca-90M" firstAttribute="leading" secondItem="Usl-Gh-d5k" secondAttribute="leading" id="fCI-wk-tbH"/>
+                            <constraint firstItem="CIc-ca-90M" firstAttribute="top" secondItem="Usl-Gh-d5k" secondAttribute="top" id="kYO-l6-gek"/>
+                            <constraint firstItem="Usl-Gh-d5k" firstAttribute="trailing" secondItem="CIc-ca-90M" secondAttribute="trailing" id="nHA-DW-6gv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="holderView" destination="CIc-ca-90M" id="7Su-FA-8U1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fNz-4P-g6D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-925" y="123"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="iTG-rJ-dCC">
             <objects>
@@ -214,6 +244,9 @@
                                                         <state key="normal" title=" Download" image="download1">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="downloadButtonTapped:" destination="VUU-os-exo" eventType="touchUpInside" id="o0s-WS-dxD"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

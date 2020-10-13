@@ -10,6 +10,7 @@
 		0A1939CF388768539105C4FC /* Pods_Test_Assignment_Maximus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */; };
 		8141C8EF2535BFBE00A85C9C /* LanguageAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141C8EE2535BFBE00A85C9C /* LanguageAPIData.swift */; };
 		8141C8F62535C08000A85C9C /* LocalizationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141C8F52535C08000A85C9C /* LocalizationData.swift */; };
+		8141C8F92535FDFA00A85C9C /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141C8F82535FDFA00A85C9C /* WelcomeVC.swift */; };
 		81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EF972534653D002E1509 /* PairAPIData.swift */; };
 		81D5EFA025346ECC002E1509 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EF9F25346ECC002E1509 /* PreviewVC.swift */; };
 		81D5EFAB253475CE002E1509 /* WallpaperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5EFAA253475CE002E1509 /* WallpaperData.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		8141C8EE2535BFBE00A85C9C /* LanguageAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageAPIData.swift; sourceTree = "<group>"; };
 		8141C8F52535C08000A85C9C /* LocalizationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationData.swift; sourceTree = "<group>"; };
+		8141C8F82535FDFA00A85C9C /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		81D5EF972534653D002E1509 /* PairAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairAPIData.swift; sourceTree = "<group>"; };
 		81D5EF9F25346ECC002E1509 /* PreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
 		81D5EFAA253475CE002E1509 /* WallpaperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperData.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				9AE38B93252B0CB600BD8B98 /* DetailVC.swift */,
 				9A716A3E252B287F00E103C5 /* MainViewController.swift */,
 				81D5EF9F25346ECC002E1509 /* PreviewVC.swift */,
+				8141C8F82535FDFA00A85C9C /* WelcomeVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */,
 				81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */,
 				9AF4DB3B25338E440007F7D4 /* CollectionFlowLayout.swift in Sources */,
+				8141C8F92535FDFA00A85C9C /* WelcomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
