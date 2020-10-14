@@ -21,7 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var openButton: UIButton!
     @IBOutlet weak var newItemLabel: UILabel!
-
+    
     
     var collectionCellDelegate: CollectionViewNew?
     var index: IndexPath?
@@ -49,6 +49,7 @@ class CollectionViewCell: UICollectionViewCell {
             self.newItemLabel.alpha = 1.0
             self.openButton.alpha = 1.0
         }
+        newItemLabel.alpha = 0.0
         
     }
     
@@ -61,11 +62,16 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateUI(image: String?, btnLabel: String?, newItemLbl: String?) {
+    func updateUI(image: String?, btnLabel: String?, newItemLbl: String?, itemNumber: Int) {
         setLabelsUI()
-        containerView.layer.cornerRadius = 15
-        containerView.clipsToBounds = true
-        
+        print("AAA")
+        if itemNumber >= 5 {
+            print("000")
+            newItemLabel.alpha = 0.0
+        } else {
+            print("111")
+            newItemLabel.alpha = 1.0
+        }
         openButton.setTitle(btnLabel ?? "Open", for: .normal)
         newItemLabel.text = newItemLbl ?? "New"
         
@@ -85,6 +91,8 @@ class CollectionViewCell: UICollectionViewCell {
         newItemLabel.layer.cornerRadius = newItemLabel.frame.height / 2
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 15
+        containerView.layer.cornerRadius = 15
+        containerView.clipsToBounds = true
         openButton.layer.cornerRadius = openButton.frame.height / 2
         
 

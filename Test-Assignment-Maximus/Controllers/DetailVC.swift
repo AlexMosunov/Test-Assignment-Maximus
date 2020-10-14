@@ -42,12 +42,12 @@ class DetailVC: UIViewController {
     var detailsDelegate: Details?
     
     var wallpaperObject: DataModel?
+    var copyright: String?
     
     var numberOfTaps = 0
     
     var imageOne: UIImage?
     var imageTwo: UIImage?
-    
     
     var spinnerView: UIView?
     var statusBarManager: UIStatusBarManager?
@@ -59,6 +59,7 @@ class DetailVC: UIViewController {
         
         view.clipsToBounds = true
         contentScrollView.delegate = self
+        apiManager?.pairDelegate = self
         
         let scrollSize = CGSize(width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = scrollSize
@@ -125,7 +126,6 @@ class DetailVC: UIViewController {
         
         watchButton.setTitle(apiManager?.localizationObject?.input_8 ?? "Preview", for: .normal)
         downloadButton.setTitle(apiManager?.localizationObject?.input_9 ?? "Download", for: .normal)
-        authorLabel.text = apiManager?.wallpaperObject?.copyright ?? ""
         
         
         watchButton.layer.cornerRadius = watchButton.frame.height / 2
@@ -155,7 +155,14 @@ class DetailVC: UIViewController {
             guard let urlOne = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)") else {return}
             wallpaperImageOne.kf.indicatorType = .activity
             wallpaperImageOne.kf.setImage(with: urlOne, completionHandler:  { result in
-                self.presetImageOne.image = UIImage(named: "preset1")
+//                self.wallpaperImageOne.image = self.wallpaperImageOne.image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
+                self.presetImageOne.contentMode = .top
+                self.presetImageOne.clipsToBounds = true
+                let image = UIImage(named: "preset1")
+                self.presetImageOne.image = image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
+                self.wallpaperImageOne.contentMode = .top
+                self.wallpaperImageOne.clipsToBounds = true
+                self.wallpaperImageOne.image = self.wallpaperImageOne.image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
             })
 
             // setting second preview image with preset image
@@ -165,6 +172,9 @@ class DetailVC: UIViewController {
                 self.presetImageTwo.clipsToBounds = true
                 let image = UIImage(named: "preset2")
                 self.presetImageTwo.image = image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
+                self.wallpaperImageTwo.contentMode = .top
+                self.wallpaperImageTwo.clipsToBounds = true
+                self.wallpaperImageTwo.image = self.wallpaperImageTwo.image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
             })
             
             // adding gesture recognizer to the gesture view
@@ -282,6 +292,20 @@ class DetailVC: UIViewController {
     
     
 
+}
+
+
+extension DetailVC: APIWallpaperDelegate {
+    func didUpdatePairData(_ DataManager: APIManager, data: WallpaperData) {
+        DispatchQueue.main.async {
+            self.authorLabel.text = self.apiManager?.wallpaperObject?.copyright ?? ""
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 

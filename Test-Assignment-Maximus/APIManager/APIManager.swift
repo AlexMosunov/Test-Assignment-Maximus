@@ -18,6 +18,10 @@ protocol APILocalizationDelegate {
     func didUpdateLocalizationData(_ DataManager: APIManager, data: LocalizationData)
 }
 
+protocol APIWallpaperDelegate {
+    func didUpdatePairData(_ DataManager: APIManager, data: WallpaperData)
+}
+
 class APIManager {
     
     let pairAPIurl = "https://pair.maximusapps.top/api/get-pair"
@@ -31,6 +35,7 @@ class APIManager {
     
     var delegate: APIManangerDelegate?
     var localizationDelegate: APILocalizationDelegate?
+    var pairDelegate: APIWallpaperDelegate?
     
     func postRequest() {
         if let nextPage = nextPage {
@@ -93,6 +98,12 @@ class APIManager {
                     let copyright = decodedData.copyright
                     
                     self.wallpaperObject = WallpaperData(id: id, image_1: image1, image_2: image2, image_3: image3, closed: closed, copyright: copyright)
+                    
+                    if let wallpaper = self.wallpaperObject {
+                        print("wallpaper")
+                        self.pairDelegate?.didUpdatePairData(self, data: wallpaper)
+                    }
+                    
                     
                 } catch {
                     print("error with getting pairs: \(error.localizedDescription)")

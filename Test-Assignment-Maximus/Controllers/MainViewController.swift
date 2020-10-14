@@ -15,7 +15,12 @@ class MainViewController: UIViewController {
     
 
     @IBOutlet weak var collectionView: UICollectionView!
-
+    @IBOutlet weak var blurStatusBarView: UIVisualEffectView!
+    
+    @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var myView: UIView!
+    @IBOutlet weak var blurViewHeight: NSLayoutConstraint!
+    
     var apiManager = APIManager()
     private var transition: CardTransition?
     var fetchingMore = false
@@ -27,9 +32,12 @@ class MainViewController: UIViewController {
     
     var openedChildVC = false
     
-    var headerLabelText = ""
-    var btnLabel = ""
-    var newItemLbl = ""
+    var haveNotPresented = true
+    
+    
+//    var headerLabelText = ""
+//    var btnLabel = ""
+//    var newItemLbl = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,22 +50,18 @@ class MainViewController: UIViewController {
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: HeaderCollectionReusableView.identifier)
         
-        print("String(NSLocale.preferredLanguages[0]) -     \(getLocalizationLanguageCode())")
         apiManager.postRequest(language: getLocalizationLanguageCode())
         apiManager.postRequest()
-        
-        // Set CollectionView Flow Layout for Header and Items
-//        let flowLayout = CollectionFlowLayout()
-//        flowLayout.scrollDirection = .vertical
-//        flowLayout.itemSize = CGSize(width: 100, height: 100)
-//        flowLayout.minimumLineSpacing = 1.0
-//        flowLayout.minimumInteritemSpacing = 1.0
-//        collectionView.collectionViewLayout = flowLayout
-        
+    
+        haveNotPresented = true
+
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("viewWillAppear")
+            
         
     }
     
@@ -65,7 +69,7 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        print("viewDidAppear")
         // animate cell's content
         if let indexPath = indexOfCell, let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
             cell.newItemLabel.alpha = 0.0
@@ -79,20 +83,30 @@ class MainViewController: UIViewController {
         
         openedChildVC = false
         setNeedsStatusBarAppearanceUpdate()
-        
-    
+
+        blurViewHeight.constant = CGFloat(getStatusBarHeight())
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if Core.shared.isNewUSer() {
-            // show onboarding
-//            let vc = storyboard?.instantiateViewController(identifier: "WelcomeVC") as! WelcomeVC
-//            vc.modalPresentationStyle = .fullScreen
-//            vc.apiManager = apiManager
-//            present(vc, animated: true)
+        print("viewDidLayoutSubviews")
+        
+        if haveNotPresented {
+            if Core.shared.isNewUSer() {
+                // show onboarding
+                print("NEW USER = \(Core.shared.isNewUSer())")
+                let vc = storyboard?.instantiateViewController(identifier: "WelcomeVC") as! WelcomeVC
+                vc.modalPresentationStyle = .fullScreen
+                vc.apiManager = apiManager
+                present(vc, animated: true)
+                haveNotPresented = false
+            }
         }
+        
     }
     
     
@@ -108,6 +122,17 @@ class MainViewController: UIViewController {
         }
         
     }
+    
+    func getStatusBarHeight() -> CGFloat {
+       var statusBarHeight: CGFloat = 0
+       if #available(iOS 13.0, *) {
+           let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+           statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+       } else {
+           statusBarHeight = UIApplication.shared.statusBarFrame.height
+       }
+       return statusBarHeight
+   }
     
     
     func getLocalizationLanguageCode() -> String {
@@ -148,7 +173,8 @@ class MainViewController: UIViewController {
         
         
         let imageObject = apiManager.imageObjectsArray[indexPath.row]
-        apiManager.postRequest(id: imageObject.id)
+        
+//        apiManager.postRequest(id: imageObject.id)
         
         viewController.wallpaperObject = imageObject
         
@@ -171,7 +197,6 @@ extension MainViewController: APIManangerDelegate {
     
     
     func didUpdateData(_ DataManager: APIManager, data: [DataModel]) {
-        print("???????????????????")
         self.apiManager.imageObjectsArray += data
         
         DispatchQueue.main.async {
@@ -213,8 +238,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
         let imageURLString = apiManager.imageObjectsArray[indexPath.row]
-//        cell.updateUI(image: imageURLString.url, btnLabel: btnLabel, newItemLbl: newItemLbl)
-        cell.updateUI(image: imageURLString.url, btnLabel: apiManager.localizationObject?.input_7, newItemLbl: apiManager.localizationObject?.input_6)
+        print(indexPath.row)
+        cell.updateUI(image: imageURLString.url, btnLabel: apiManager.localizationObject?.input_7, newItemLbl: apiManager.localizationObject?.input_6, itemNumber: indexPath.row)
         cell.collectionCellDelegate = self
         cell.index = indexPath
         
@@ -298,6 +323,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
     
     //3UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
+    //image insets - left: 11, top: 9
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -356,7 +382,25 @@ class Core {
     }
     
     func setIsNotNewUser() {
+        print("NOT A NEW USER ANYMORE")
         UserDefaults.standard.set(true, forKey: "isNewUser")
     }
+    
+    
+//    static func playVideo(resourceName: String, type: String, videoView: UIView ,vc: UIViewController) {
+//        guard let path = Bundle.main.path(forResource: resourceName, ofType: type) else {
+//            return
+//        }
+//        let player = AVPlayer(url: URL(fileURLWithPath: path))
+//        let playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.frame = vc.view.bounds
+//        playerLayer.videoGravity = .resizeAspectFill
+//        videoView.layer.addSublayer(playerLayer)
+//
+//        player.play()
+//
+////        videoView.bringSubviewToFront(label)
+//
+//    }
     
 }

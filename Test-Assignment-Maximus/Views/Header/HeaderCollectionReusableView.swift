@@ -28,6 +28,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         super.init(coder: aDecoder)
     }
     
+    
     let label: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -68,7 +69,6 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         label.leftAnchor.constraint(equalTo: videoView.leftAnchor, constant: 26).isActive = true
         label.rightAnchor.constraint(equalTo: videoView.rightAnchor, constant: 16).isActive = true
         label.topAnchor.constraint(equalTo: videoView.topAnchor, constant: 100).isActive = true
-//        label.bottomAnchor.constraint(equalTo: videoView.bottomAnchor, constant: 10).isActive = true
         
         playVideo()
     }
