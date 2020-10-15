@@ -19,11 +19,11 @@ struct LocalizationData {
     let input_7: String?
     let input_8: String?
     let input_9: String?
-//    let input_10: String?
-//    let input_11: String?
-//    let input_12: String?
-//    let input_13: String?
-//    let input_14: String?
+    let input_10: String?
+    let input_11: String?
+    let input_12: String?
+    let input_13: String?
+    let input_14: String?
 //    let input_15: String?
 //    let input_16: String?
 //    let input_17: String?

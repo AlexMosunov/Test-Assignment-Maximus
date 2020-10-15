@@ -64,12 +64,9 @@ class CollectionViewCell: UICollectionViewCell {
     
     func updateUI(image: String?, btnLabel: String?, newItemLbl: String?, itemNumber: Int) {
         setLabelsUI()
-        print("AAA")
         if itemNumber >= 5 {
-            print("000")
             newItemLabel.alpha = 0.0
         } else {
-            print("111")
             newItemLabel.alpha = 1.0
         }
         openButton.setTitle(btnLabel ?? "Open", for: .normal)
@@ -94,8 +91,6 @@ class CollectionViewCell: UICollectionViewCell {
         containerView.layer.cornerRadius = 15
         containerView.clipsToBounds = true
         openButton.layer.cornerRadius = openButton.frame.height / 2
-        
-
     }
     
 

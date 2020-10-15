@@ -69,7 +69,6 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewDidAppear")
         // animate cell's content
         if let indexPath = indexOfCell, let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
             cell.newItemLabel.alpha = 0.0
@@ -93,12 +92,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("viewDidLayoutSubviews")
-        
         if haveNotPresented {
             if Core.shared.isNewUSer() {
                 // show onboarding
-                print("NEW USER = \(Core.shared.isNewUSer())")
                 let vc = storyboard?.instantiateViewController(identifier: "WelcomeVC") as! WelcomeVC
                 vc.modalPresentationStyle = .fullScreen
                 vc.apiManager = apiManager
@@ -346,22 +342,16 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
 extension MainViewController: CollectionViewNew {
     func onClickCellButton(index: IndexPath) {
-        
         showType2(indexPath: index)
-        
     }
-    
-    
 }
 
+
+
 extension MainViewController: Details {
-    
     func passCellIndex(index: IndexPath) {
         indexOfCell = index
-        
     }
-    
-    
 }
 
 
@@ -382,25 +372,9 @@ class Core {
     }
     
     func setIsNotNewUser() {
-        print("NOT A NEW USER ANYMORE")
+        //NOT A NEW USER ANYMORE
         UserDefaults.standard.set(true, forKey: "isNewUser")
     }
     
-    
-//    static func playVideo(resourceName: String, type: String, videoView: UIView ,vc: UIViewController) {
-//        guard let path = Bundle.main.path(forResource: resourceName, ofType: type) else {
-//            return
-//        }
-//        let player = AVPlayer(url: URL(fileURLWithPath: path))
-//        let playerLayer = AVPlayerLayer(player: player)
-//        playerLayer.frame = vc.view.bounds
-//        playerLayer.videoGravity = .resizeAspectFill
-//        videoView.layer.addSublayer(playerLayer)
-//
-//        player.play()
-//
-////        videoView.bringSubviewToFront(label)
-//
-//    }
     
 }

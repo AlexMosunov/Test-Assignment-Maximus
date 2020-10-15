@@ -278,23 +278,47 @@
                                                             <action selector="watchButtonTapped:" destination="VUU-os-exo" eventType="touchUpInside" id="iHo-xM-mlB"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEp-0t-J3H">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PSC-GR-EtI">
                                                         <rect key="frame" x="151" y="0.0" width="134" height="44"/>
-                                                        <color key="backgroundColor" red="0.14901960780000001" green="0.33725490200000002" blue="0.99607843139999996" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEp-0t-J3H">
+                                                                <rect key="frame" x="0.0" y="0.0" width="134" height="44"/>
+                                                                <color key="backgroundColor" red="0.14901960780000001" green="0.33725490200000002" blue="0.99607843139999996" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="44" id="7vS-yh-fhe"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="Kmw-K2-3Q6"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="28" minY="15" maxX="92" maxY="15"/>
+                                                                <state key="normal" title=" Download" image="download1">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="downloadButtonTapped:" destination="VUU-os-exo" eventType="touchUpInside" id="o0s-WS-dxD"/>
+                                                                </connections>
+                                                            </button>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Qgx-fD-Zss">
+                                                                <rect key="frame" x="114" y="-4.5" width="25" height="23.5"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="25" id="0cP-af-oNL"/>
+                                                                    <constraint firstAttribute="height" constant="25" id="NeA-mK-UZl"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="44" id="7vS-yh-fhe"/>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="Kmw-K2-3Q6"/>
+                                                            <constraint firstAttribute="trailing" secondItem="tEp-0t-J3H" secondAttribute="trailing" id="58J-lE-tQN"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Qgx-fD-Zss" secondAttribute="trailing" constant="-5" id="Dvy-He-Hy1"/>
+                                                            <constraint firstItem="tEp-0t-J3H" firstAttribute="leading" secondItem="PSC-GR-EtI" secondAttribute="leading" id="L0D-7v-3Jy"/>
+                                                            <constraint firstItem="tEp-0t-J3H" firstAttribute="top" secondItem="PSC-GR-EtI" secondAttribute="top" id="Lzx-l0-73h"/>
+                                                            <constraint firstAttribute="bottom" secondItem="tEp-0t-J3H" secondAttribute="bottom" id="Nhb-zC-scI"/>
+                                                            <constraint firstItem="Qgx-fD-Zss" firstAttribute="top" secondItem="PSC-GR-EtI" secondAttribute="top" constant="-5" id="fUC-ZV-KXE"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="mFd-BP-8sw"/>
+                                                            <constraint firstAttribute="height" constant="44" id="nHQ-7g-u1e"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="28" minY="15" maxX="92" maxY="15"/>
-                                                        <state key="normal" title=" Download" image="download1">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="downloadButtonTapped:" destination="VUU-os-exo" eventType="touchUpInside" id="o0s-WS-dxD"/>
-                                                        </connections>
-                                                    </button>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -385,6 +409,7 @@
                         <outlet property="headerView" destination="BzJ-Gj-kdc" id="SJW-9e-jtL"/>
                         <outlet property="heightConstraint" destination="ABG-Pr-vlv" id="IK5-2g-AHG"/>
                         <outlet property="imageView" destination="BX6-be-HBO" id="7ck-Pt-fDe"/>
+                        <outlet property="lockedImage" destination="Qgx-fD-Zss" id="9lk-Wj-UaB"/>
                         <outlet property="presetImageOne" destination="Na2-i0-U1Z" id="Mle-an-8oP"/>
                         <outlet property="presetImageTwo" destination="6SB-8M-ZX1" id="hgk-ml-eSJ"/>
                         <outlet property="wallpaperImageOne" destination="wTk-ts-mvG" id="ceO-GD-7xF"/>
@@ -400,6 +425,7 @@
     <resources>
         <image name="download1" width="47" height="47"/>
         <image name="eye1" width="47" height="36"/>
+        <image name="lock.fill" catalog="system" width="128" height="128"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

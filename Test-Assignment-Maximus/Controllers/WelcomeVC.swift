@@ -33,21 +33,11 @@ class WelcomeVC: UIViewController {
         scrollView.delegate = self
         swiped = false
         
-//        videoViewOne.layer.addSublayer(playerLayer)
-//        videoViewTwo.layer.addSublayer(playerLayer)
-//        apiManager?.postRequest(language: getLocalizationLanguageCode())
-        // Do any additional setup after loading the view.
     }
     
-//    override func layoutSubviews() {
-//         super.layoutSubviews()
-//         playerLayer.frame = bounds
-//     }
-//
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("ooooooooooooooo")
 //        playerLayer.frame = self.bounds
 //        configure()
     }
@@ -73,9 +63,7 @@ class WelcomeVC: UIViewController {
         // set up scroll view
         
         scrollView.frame = holderView.bounds
-        
         holderView.addSubview(scrollView)
-        
         
         let numberOfPages = 2
         
@@ -86,7 +74,6 @@ class WelcomeVC: UIViewController {
             // Title, image, button
             let label = UILabel(frame: CGRect(x: 32, y: pageView.frame.size.height - 92 - 79 - 60 - 50, width: pageView.frame.size.width - 64, height: 100))
             
-            print("pageView.frame.size.height - \(pageView.frame.size.height)")
             videoViewOne = UIView(frame: CGRect(x: 22, y: pageView.frame.size.height - 700, width: pageView.frame.size.width - 44, height: 321))
             videoViewTwo = UIView(frame: CGRect(x: 22, y: pageView.frame.size.height - 700, width: pageView.frame.size.width - 44, height: 321))
             
@@ -100,29 +87,17 @@ class WelcomeVC: UIViewController {
             pageView.addSubview(label)
             label.text = labelTitles[x]
             
-//            videoViewOne.backgroundColor = .darkGray
-//            videoViewTwo.backgroundColor = .blue
-//            videoView.tag = x + 1
-//            print("tag - \(videoView.tag)")
+            
             if x == 0 {
                 pageView.addSubview(videoViewOne)
                 playVideo(resourceName: "vid_onboard_1", type: "mp4", videoView: videoViewOne)
-//                videoViewOne.layer.addSublayer(playerLayer)
             } else if x == 1 {
                 pageView.addSubview(videoViewTwo)
-//                videoViewTwo.layer.addSublayer(playerLayer)
             }
             
            
-//            pageView.addSubview(videoView)
-            if x == 0 {
-//                playVideo(resourceName: "vid_onboard_1", type: "mp4", videoView: videoView)
-            } else if x == 1 {
-//                playVideo(resourceName: "vid_onboard_2", type: "mp4", videoView: videoView)
-            }
-           
             button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = UIColor(red: 38.0 / 255.0, green: 86.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
+            button.backgroundColor = .clearBlue
             button.setTitle(buttonTitles[x], for: .normal)
             button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
             button.tag = x + 1
@@ -168,20 +143,6 @@ class WelcomeVC: UIViewController {
         // Start the movie
         player.play()
         
-//                let item = AVPlayerItem(asset: asset)
-//        let player = AVPlayer(url: URL(fileURLWithPath: path))
-////        let controller = AVPlayerViewController()
-////        controller.player = player
-        print("player player")
-//        swiped = true
-//swiped
-//        let playerLayer = AVPlayerLayer(player: player)
-//        playerLayer.frame = videoView.bounds
-//        playerLayer.videoGravity = .resizeAspectFill
-//        videoView.layer.addSublayer(playerLayer)
-//
-//        player.play()
-//        swiped = false
     }
     
     
@@ -194,7 +155,6 @@ extension WelcomeVC: APILocalizationDelegate {
         self.buttonTitles = [data.input_2 ?? "Next", data.input_4 ?? "Next"]
         DispatchQueue.main.async {
             self.configure()
-            print("hello")
         }
         
     }
@@ -204,27 +164,22 @@ extension WelcomeVC: APILocalizationDelegate {
 }
 extension WelcomeVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(scrollView.contentOffset.x)
         if scrollView.contentOffset.x > 200 {
-//            if videoView.tag == 2 {
             if !swiped {
-                print("!!!!!!!!!!!!!!!!!")
                 playVideo(resourceName: "vid_onboard_2", type: "mp4", videoView: videoViewTwo)
-//                swiped = true
             }
             
         } else if scrollView.contentOffset.x == 0 {
             
-            if !swiped {
-//                print("<<<<<<)")
-                playVideo(resourceName: "vid_onboard_1", type: "mp4", videoView: videoViewOne)
-//                swiped = true
-//                playVideo(resourceName: "vid_onboard_1", type: "mp4", videoView: videoViewOne)
-            }
-//            print("< 200")
-//            if videoView.tag == 1 {
-                
-//            }
         }
     }
+}
+
+
+
+
+extension UIColor {
+  @nonobjc class var clearBlue: UIColor {
+    return UIColor(red: 38.0 / 255.0, green: 86.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
+  }
 }

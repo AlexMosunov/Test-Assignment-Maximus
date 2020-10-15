@@ -17,7 +17,6 @@ protocol Details {
 
 class DetailVC: UIViewController {
 
-
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -31,7 +30,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var wallpaperImageOne: UIImageView!
     @IBOutlet weak var presetImageTwo: UIImageView!
     @IBOutlet weak var presetImageOne: UIImageView!
-    
+    @IBOutlet weak var lockedImage: UIImageView!
     
     
     var apiManager: APIManager?
@@ -53,6 +52,13 @@ class DetailVC: UIViewController {
     var statusBarManager: UIStatusBarManager?
     var openedImage = false
     
+    var isImageOpen: Bool?
+    
+    
+    private lazy var alertView: PhotosSavedView = {
+        let alertView = Bundle.main.loadNibNamed("PhotosSavedView", owner: self, options: nil)?.first as! PhotosSavedView
+        return alertView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,10 +129,8 @@ class DetailVC: UIViewController {
 
     
     func setUI() {
-        
         watchButton.setTitle(apiManager?.localizationObject?.input_8 ?? "Preview", for: .normal)
         downloadButton.setTitle(apiManager?.localizationObject?.input_9 ?? "Download", for: .normal)
-        
         
         watchButton.layer.cornerRadius = watchButton.frame.height / 2
         downloadButton.layer.cornerRadius = downloadButton.frame.height / 2
@@ -141,9 +145,10 @@ class DetailVC: UIViewController {
         cancelButton.bringSubviewToFront(cancelButton.imageView!)
         cancelButton.alpha = 1.0
         imageView.layer.cornerRadius = 10
-        
     }
     
+    
+    //MARK: - Download and set preview images
     
     func setPreviewImages() {
         if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {
@@ -155,7 +160,6 @@ class DetailVC: UIViewController {
             guard let urlOne = URL(string: "https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)") else {return}
             wallpaperImageOne.kf.indicatorType = .activity
             wallpaperImageOne.kf.setImage(with: urlOne, completionHandler:  { result in
-//                self.wallpaperImageOne.image = self.wallpaperImageOne.image?.resizeTopAlignedToFill(newWidth: self.imageView.frame.width)
                 self.presetImageOne.contentMode = .top
                 self.presetImageOne.clipsToBounds = true
                 let image = UIImage(named: "preset1")
@@ -204,6 +208,9 @@ class DetailVC: UIViewController {
             print("image downloaded")
             imageCompletionHandler(value.image)
         case .failure:
+            let ac = UIAlertController(title: "Image failed to download", message: "Please check your internet connection", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
             print("image failed to download")
             imageCompletionHandler(nil)
         }
@@ -217,7 +224,12 @@ class DetailVC: UIViewController {
     
     
     @IBAction func downloadButtonTapped(_ sender: UIButton) {
+        guard isImageOpen ?? false else { return }
+        
         if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {
+            
+            // enable activity indicator
+            activityIndicator(isEnabled: true)
             
             downloadImage(with :"https://pair.maximusapps.top/storage/\(wallpaperObject.image_1)"){image in
                 guard let image  = image else { return}
@@ -236,7 +248,6 @@ class DetailVC: UIViewController {
     
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-        
         UIView.animate(withDuration: 0.4) {
             self.cancelButton.alpha = 0.0
         }
@@ -244,17 +255,34 @@ class DetailVC: UIViewController {
     }
     
     
+//    func changeInfoPlist() {
+//        var infoPlistPath = Bundle.main.path(forResource: "Info", ofType: "plist")
+////        var infoPlistDict = NSk
+//            NSMutableDictionary(contentsOfFile: playersDictionaryPath!)
+//
+//           var nsAppKey = infoPlistDict?.object(forKey: "NSAppTransportSecurity") as! NSDictionary
+//
+//           print(nsAppKey["NSAllowsArbitraryLoads"])
+//    }
+    
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        
+        // disable activity indicator
+        activityIndicator(isEnabled: false)
+        
         if let error = error {
-            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            if error.localizedDescription == "Data unavailable" {
+                showAlertView(imageName: "permit-access", mainLabelText: apiManager?.localizationObject?.input_11 ?? "Allow access to the Gallery", secondLabelText: apiManager?.localizationObject?.input_10 ?? "This access is required to save wallpapers to your Gallery", buttonText: apiManager?.localizationObject?.input_12 ?? "Ok, get it", openSettings: true)
+            } else {
+                let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
         } else {
-            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            showAlertView(imageName: "images-saved", mainLabelText: apiManager?.localizationObject?.input_13 ?? "Wallpapers has been saved", secondLabelText: "", buttonText: apiManager?.localizationObject?.input_14 ?? "Nice")
         }
     }
+    
     
 
     @objc func handleTapOnHeaderView(sender: UITapGestureRecognizer) {
@@ -290,24 +318,65 @@ class DetailVC: UIViewController {
     }
     
     
+    func showAlertView(imageName: String, mainLabelText: String, secondLabelText: String, buttonText: String, openSettings: Bool? = false) {
+        alertView.layer.cornerRadius = 16
+        alertView.layer.masksToBounds = true
+        
+        alertView.setUI(imageName: imageName, mainLabelText: mainLabelText, secondLabelText: secondLabelText, buttonText: buttonText, openSettings: openSettings)
+ 
+        view.addSubview(alertView)
+        alertView.center = view.center
+        
+        alertView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        alertView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+            self.alertView.alpha = 1
+            self.alertView.transform = CGAffineTransform.identity
+        }
+    }
     
-
+    
+    func activityIndicator(isEnabled: Bool) {
+        if isEnabled {
+            spinnerView = UIView(frame: self.view.bounds)
+            spinnerView?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+            let ai = UIActivityIndicatorView(style: .large)
+            ai.center = spinnerView!.center
+            spinnerView?.addSubview(ai)
+            self.view.addSubview(spinnerView!)
+            ai.startAnimating()
+        } else {
+            spinnerView?.removeFromSuperview()
+            spinnerView = nil
+        }
+    }
+    
 }
 
+
+//MARK: - APIWallpaperDelegate
 
 extension DetailVC: APIWallpaperDelegate {
     func didUpdatePairData(_ DataManager: APIManager, data: WallpaperData) {
         DispatchQueue.main.async {
             self.authorLabel.text = self.apiManager?.wallpaperObject?.copyright ?? ""
+            if self.apiManager?.wallpaperObject?.closed == 1 {
+                self.lockedImage.alpha = 1.0
+            } else {
+                self.isImageOpen = true
+                self.lockedImage.alpha = 0.0
+            }
         }
         
     }
     
-    
-    
-    
 }
 
+
+
+
+//MARK: - UIScrollViewDelegate
 
 extension DetailVC: UIScrollViewDelegate {
     
@@ -329,6 +398,7 @@ extension DetailVC: UIScrollViewDelegate {
 
 
 
+//MARK: - CardDetailViewController
 
 extension DetailVC: CardDetailViewController {
     var scrollView: UIScrollView {
@@ -342,13 +412,12 @@ extension DetailVC: CardDetailViewController {
     var cardContentView: UIView {
         return headerView
     }
-    
-    
 
 }
 
 
 
+//MARK: - extension UIImage
 
 extension UIImage {
     func resizeTopAlignedToFill(newWidth: CGFloat) -> UIImage? {

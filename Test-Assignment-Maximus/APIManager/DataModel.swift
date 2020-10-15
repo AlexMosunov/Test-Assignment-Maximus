@@ -13,5 +13,4 @@ struct DataModel {
     var id: Int
     var url: String
     
- 
 }

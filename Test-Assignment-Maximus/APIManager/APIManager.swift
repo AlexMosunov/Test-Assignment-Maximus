@@ -174,6 +174,8 @@ class APIManager {
         }
     }
     
+    
+    
     func parseLocalizationJSON(data: Data) -> LocalizationData? {
         var localizationObj: LocalizationData?
         let decoder = JSONDecoder()
@@ -189,6 +191,11 @@ class APIManager {
             let input7 = decodedData[0].input_7
             let input8 = decodedData[0].input_8
             let input9 = decodedData[0].input_9
+            let input10 = decodedData[0].input_10
+            let input11 = decodedData[0].input_11
+            let input12 = decodedData[0].input_12
+            let input13 = decodedData[0].input_13
+            let input14 = decodedData[0].input_14
             
             localizationObj = LocalizationData(input_1: input1,
                                                        input_2: input2,
@@ -198,7 +205,12 @@ class APIManager {
                                                        input_6: input6,
                                                        input_7: input7,
                                                        input_8: input8,
-                                                       input_9: input9)
+                                                       input_9: input9,
+                                                       input_10: input10,
+                                                       input_11: input11,
+                                                       input_12: input12,
+                                                       input_13: input13,
+                                                       input_14: input14)
             
             self.localizationObject = LocalizationData(input_1: input1,
                                                        input_2: input2,
@@ -208,8 +220,12 @@ class APIManager {
                                                        input_6: input6,
                                                        input_7: input7,
                                                        input_8: input8,
-                                                       input_9: input9)
-            
+                                                       input_9: input9,
+                                                       input_10: input10,
+                                                       input_11: input11,
+                                                       input_12: input12,
+                                                       input_13: input13,
+                                                       input_14: input14)
          
             return localizationObj
 

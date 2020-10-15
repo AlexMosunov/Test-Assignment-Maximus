@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A1939CF388768539105C4FC /* Pods_Test_Assignment_Maximus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9E24B586D0E0170A7644 /* Pods_Test_Assignment_Maximus.framework */; };
+		813EE70A25383FF400A1A83C /* PhotosSavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EE70925383FF400A1A83C /* PhotosSavedView.swift */; };
+		813EE70D2538404200A1A83C /* PhotosSavedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 813EE70C2538404200A1A83C /* PhotosSavedView.xib */; };
 		8141C8EF2535BFBE00A85C9C /* LanguageAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141C8EE2535BFBE00A85C9C /* LanguageAPIData.swift */; };
 		8141C8F62535C08000A85C9C /* LocalizationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141C8F52535C08000A85C9C /* LocalizationData.swift */; };
 		8141C8F92535FDFA00A85C9C /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141C8F82535FDFA00A85C9C /* WelcomeVC.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		813EE70925383FF400A1A83C /* PhotosSavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSavedView.swift; sourceTree = "<group>"; };
+		813EE70C2538404200A1A83C /* PhotosSavedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosSavedView.xib; sourceTree = "<group>"; };
 		8141C8EE2535BFBE00A85C9C /* LanguageAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageAPIData.swift; sourceTree = "<group>"; };
 		8141C8F52535C08000A85C9C /* LocalizationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationData.swift; sourceTree = "<group>"; };
 		8141C8F82535FDFA00A85C9C /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
@@ -79,6 +83,15 @@
 				EF86513A356A2CB08EED4ABD /* Pods-Test-Assignment-Maximus.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		813EE70825383F9500A1A83C /* CustomAlertViews */ = {
+			isa = PBXGroup;
+			children = (
+				813EE70925383FF400A1A83C /* PhotosSavedView.swift */,
+				813EE70C2538404200A1A83C /* PhotosSavedView.xib */,
+			);
+			path = CustomAlertViews;
 			sourceTree = "<group>";
 		};
 		81D5EF9B253465C1002E1509 /* JSONDecoders */ = {
@@ -167,6 +180,7 @@
 		9AF4DB3925334AC70007F7D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				813EE70825383F9500A1A83C /* CustomAlertViews */,
 				9A1435232529DA19005F59D1 /* LaunchScreen.storyboard */,
 				9A14351E2529DA15005F59D1 /* Main.storyboard */,
 				9A1435322529E0A1005F59D1 /* Cells */,
@@ -248,6 +262,7 @@
 				9A14353C252A1C60005F59D1 /* gradient_60.mp4 in Resources */,
 				81E3954E25374FD70034AD8F /* vid_onboard_2.mp4 in Resources */,
 				9A1435222529DA19005F59D1 /* Assets.xcassets in Resources */,
+				813EE70D2538404200A1A83C /* PhotosSavedView.xib in Resources */,
 				9A1435202529DA15005F59D1 /* Main.storyboard in Resources */,
 				81E3954D25374FD70034AD8F /* vid_onboard_1.mp4 in Resources */,
 			);
@@ -313,6 +328,7 @@
 				9AE38B94252B0CB600BD8B98 /* DetailVC.swift in Sources */,
 				81D5EFAB253475CE002E1509 /* WallpaperData.swift in Sources */,
 				9A716A3F252B287F00E103C5 /* MainViewController.swift in Sources */,
+				813EE70A25383FF400A1A83C /* PhotosSavedView.swift in Sources */,
 				9AEFEF09252CC944003562C6 /* DataModel.swift in Sources */,
 				81D5EF982534653D002E1509 /* PairAPIData.swift in Sources */,
 				9AF4DB3B25338E440007F7D4 /* CollectionFlowLayout.swift in Sources */,

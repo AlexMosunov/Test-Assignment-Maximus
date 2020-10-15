@@ -14,26 +14,10 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     static let identifier = "HeaderCollectionReusableView"
     
     
-//    var videoView: UIView!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-//        createViews()
-        
-//        setViewConstraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    
     let label: UILabel = {
         let label = UILabel()
         label.text = ""
         label.textColor = .white
-//        label.font = UIFont(name: "Helvetica Neue", size: 35)
         label.font = UIFont.boldSystemFont(ofSize: 33)
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -42,7 +26,6 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     
     private let videoView: UIView = {
         let videoView = UIView()
-//        videoView.backgroundColor = .blue
 
         return videoView
         
