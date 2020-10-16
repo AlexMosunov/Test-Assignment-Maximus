@@ -1,8 +1,8 @@
 PODS:
   - appstore-card-transition (1.0.4)
-  - Kingfisher (5.15.5):
-    - Kingfisher/Core (= 5.15.5)
-  - Kingfisher/Core (5.15.5)
+  - Kingfisher (5.15.6):
+    - Kingfisher/Core (= 5.15.6)
+  - Kingfisher/Core (5.15.6)
 
 DEPENDENCIES:
   - appstore-card-transition
@@ -15,8 +15,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   appstore-card-transition: 660c136cb8a0f0004b2e99e99f1305bfa041f05c
-  Kingfisher: e3ec347a5ab8817b7585ef46923a2d2b9a7d8fbe
+  Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
 
-PODFILE CHECKSUM: 12ab14ef6568a99a875c7816fa883b34784a8684
+PODFILE CHECKSUM: 4dfb06c56698032e5814825326b13f56717814f4
 
 COCOAPODS: 1.9.3

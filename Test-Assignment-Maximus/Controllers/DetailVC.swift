@@ -83,6 +83,11 @@ class DetailVC: UIViewController {
         modalPresentationCapturesStatusBarAppearance = true
         setNeedsStatusBarAppearanceUpdate()
         
+        
+        // Appodeal
+//        Appodeal.showAd(.rewardedVideo, rootViewController: self)
+       
+
     }
     
     
@@ -224,6 +229,8 @@ class DetailVC: UIViewController {
     
     
     @IBAction func downloadButtonTapped(_ sender: UIButton) {
+//        Appodeal.showAd(AppodealShowStyle.rewardedVideo, rootViewController: self)
+        
         guard isImageOpen ?? false else { return }
         
         if let apiManager = apiManager, let wallpaperObject = apiManager.wallpaperObject {

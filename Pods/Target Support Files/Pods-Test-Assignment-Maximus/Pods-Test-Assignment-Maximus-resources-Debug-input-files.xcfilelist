@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-Test-Assignment-Maximus/Pods-Test-Assignment-Maximus-resources.sh
+${PODS_ROOT}/APDAppLovinAdapter/APDAppLovinAdapter.embeddedframework/Resources/AppLovinSDKResources.bundle
+${PODS_ROOT}/APDStartAppAdapter/APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle
+${PODS_ROOT}/APDTapjoyAdapter/APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle
